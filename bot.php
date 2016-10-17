@@ -22,7 +22,7 @@ if (!is_null($events['events'])) {
 				'text' => 'บ่นไรไอ้ฟาย'
 			];
 			
-			$messages = [
+			$messages1 = [
 				 'type'=> 'sticker',
 				 'packageId'=> '2',
 				 'stickerId'=> '165'
@@ -33,6 +33,7 @@ if (!is_null($events['events'])) {
 			$data = [
 				'replyToken' => $replyToken,
 				'messages' => [$messages],
+				'messages' => [$messages1]
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
