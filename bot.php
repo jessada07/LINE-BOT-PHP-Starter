@@ -20,7 +20,6 @@ if (!is_null($events['events'])) {
 			$messages = [
 				'type' => 'text',
 				'text' => 'บ่นไรไอ้ฟาย'
-                'text' => 'GG EZ'
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
