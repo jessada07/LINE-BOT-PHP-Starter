@@ -19,22 +19,15 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => 'บ่นไรไอ้ฟาย'
-			];
-			
-			$messages1 = [
-				 'type'=> 'sticker',
-				 'packageId'=> '2',
-				 'stickerId'=> '165'
+				'text' => 'แน่นอนครับ นาย'
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => [$messages],
-				'messages' => [$messages1]
-			];
+				'messages' => [$messages]
+				];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
