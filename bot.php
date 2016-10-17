@@ -23,9 +23,9 @@ if (!is_null($events['events'])) {
 			];
 			
 			$messages = [
-				 "type": "sticker",
-				 "packageId": "2",
-				 "stickerId": "165"
+				 'type'=> 'sticker',
+				 'packageId'=> '2',
+				 'stickerId'=> '165'
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
