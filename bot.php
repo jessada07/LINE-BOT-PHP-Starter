@@ -16,7 +16,14 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
 			switch($text){
-				case 'เปิดไฟ' || 'ปิดไฟ':
+				case 'เปิดไฟ':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'เรียบร้อย'			
+							    ];
+				    break;
+				case 'ปิดไฟ':
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
