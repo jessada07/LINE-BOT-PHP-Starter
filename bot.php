@@ -5,8 +5,8 @@ $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/s
 $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
-
-function get(){
+// Validate parsed JSON data
+if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
@@ -15,12 +15,41 @@ function get(){
 			$text = $event['message']['text'];
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
-			if($text == "Hello"){
-				// Build message to reply back
-				$messages = [
-							 'type' => 'text',
-							 'text' => $text			
-							];
+			switch($text){
+				case 'สวัสดี':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'สวัสดีค่ะ'			
+							    ];
+				    break;
+				case 'เปิดไฟ':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'เรียบร้อยค่ะ'			
+							    ];
+				    break;
+				case 'ปิดไฟ':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'เรียบร้อยค่ะ'			
+							    ];
+				    break;
+				case 'อุณหภูมิ':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'ขณะนี้อุณหภูมิ'			
+							    ];
+				    break;
+				default:
+					$messages = [
+							     'type' => 'text',
+							     'text' => $text		
+							    ];
+					break;
 				// Make a POST Request to Messaging API to reply to sender
 	            $url = 'https://api.line.me/v2/bot/message/reply';
 	            $data = [
@@ -42,10 +71,7 @@ function get(){
 			    echo $result . "\r\n";
 			}			
 		}
-	}	
+	}
 }
-// Validate parsed JSON data
-if (!is_null($events['events'])) {
-	get();	
-}
+
 ?>
