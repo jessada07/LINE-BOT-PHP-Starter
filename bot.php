@@ -30,15 +30,14 @@ if (!is_null($events['events'])) {
 							     'text' => 'ขณะนี้อุณหภูมิ'			
 							    ];
 				    break;
-				case 'บ้านของฉัน':
-					$text = $event['message']['location'];
-					{
+				case 'บ้านของฉัน':		
+					$messages = [
                     'type': "location",
                     'title': "my location",
                     'address': "503"
                     'latitude': 35.65910807942215,
                     'longitude': 139.70372892916203
-                     }
+                     ]
 					break;					
 				default:
 					$messages = [
