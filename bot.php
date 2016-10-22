@@ -13,25 +13,23 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			$text = $event['message']['text'];
-			// Build message to reply back
-			$messages = [
-				'type' => 'text',
-				'text' => 'Hello Boss'
-			];
-			reply_messaging($messages);
-
-		}
-	}
-}
-function reply_messaging($messages){
-	// Get replyToken
+			if($text == "Hello"){
+				// Build message to reply back
+				$messages = [{
+							 'type' => 'text',
+							 'text' => $text}				             
+							 ,{'type' => 'text',
+							   'text' => "What can i do for you?"}
+							 ];
+			}
+            // Get replyToken
 			$replyToken = $event['replyToken'];
-	// Make a POST Request to Messaging API to reply to sender
+			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => [$messages]
-				];
+				'messages' => [$messages],
+			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
@@ -45,7 +43,8 @@ function reply_messaging($messages){
 			curl_close($ch);
 
 			echo $result . "\r\n";
-	
-}			
+		}
+	}
+}
+
 echo "OK";
-?>
