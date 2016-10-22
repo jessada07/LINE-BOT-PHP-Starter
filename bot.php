@@ -46,7 +46,6 @@ function reply() {
 			curl_close($ch);
 
 			echo $result . "\r\n";
-	
+	echo 'ok';
 }
-
-echo "OK";
+?>
