@@ -18,8 +18,7 @@ if (!is_null($events['events'])) {
 				$messages = [
 							 'type' => 'text',
 							 'text' => $text			
-							];
-				reply();
+							];				
 			}			
 		}
 	}
@@ -46,6 +45,7 @@ function reply() {
 			curl_close($ch);
 
 			echo $result . "\r\n";
-	echo 'ok';
+	echo "ok";
 }
+reply();
 ?>
