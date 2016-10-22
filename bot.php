@@ -38,7 +38,7 @@ if (!is_null($events['events'])) {
                     "latitude": 35.65910807942215,
                     "longitude": 139.70372892916203
                      }
-					 break:					
+					 break;					
 				default:
 					$messages = [
 							     'type' => 'text',
