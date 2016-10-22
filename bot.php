@@ -57,9 +57,10 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['sticker'];
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
+			$random = rand(407,430);
 			$messages = [
 						 'type' => 'sticker',
-                         'packageId' => rand(407,430),
+                         'packageId' => $random,
                          'stickerId' => '1'
 						];
 		}
