@@ -51,7 +51,12 @@ if (!is_null($events['events'])) {
 							    ];
 					break;
 			}
-		}if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
+		}
+		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
+			// Get text sent
+			$text = $event['message']['sticker'];
+			// Get replyToken
+	        $replyToken = $event['replyToken'];
 			$messages = [
 						 'type' => 'sticker',
                          'packageId' => '1',
