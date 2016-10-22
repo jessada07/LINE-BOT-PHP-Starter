@@ -60,8 +60,8 @@ if (!is_null($events['events'])) {
 			$random = rand(407,430);
 			$messages = [
 						 'type' => 'sticker',
-                         'packageId' => $random,
-                         'stickerId' => '1'
+                         'packageId' => '1',
+                         'stickerId' => $random
 						];
 		}
 			
