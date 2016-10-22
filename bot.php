@@ -51,7 +51,7 @@ if (!is_null($events['events'])) {
 							    ];
 					break;
 			}
-		}if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
+		}if ($event['type'] == 'sticker'){
 			$random = rand(407,430);
 			$messages = [
 						 'type' => 'sticker',
