@@ -23,10 +23,7 @@ if (!is_null($events['events'])) {
 				case 'เปิดไฟ':
 				    // Build message to reply back
             fwrite($fp, "1");
-				    $messages = [
-							     'type' => 'text',
-							     'text' => 'เรียบร้อย'			
-							    ];
+
             
 				    break;
 				case 'ปิดไฟ':
