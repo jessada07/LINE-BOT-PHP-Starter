@@ -21,19 +21,21 @@ if (!is_null($events['events'])) {
 			switch($text){
 				case 'เปิดไฟ':
 				    // Build message to reply back
+            fwrite($fp, "1");
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
 							    ];
-            fwrite($fp, "1");
+            
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
+            fwrite($fp, "0");
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
 							    ];
-            fwrite($fp, "0");
+            
 				    break;
 				case 'อุณหภูมิ':
 				    // Build message to reply back
@@ -50,6 +52,7 @@ if (!is_null($events['events'])) {
 					break;
 			}
 		}
+    fclose($fp);
 		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
 			// Get text sent
 			$text = $event['message']['sticker'];
@@ -83,6 +86,6 @@ if (!is_null($events['events'])) {
 		echo $result . "\r\n";			
 	}
 }
-fclose($fp);
+
 
 ?>
