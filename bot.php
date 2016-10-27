@@ -16,14 +16,19 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['text'];
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
-      $verz="1.0";
-      exec("mode COM3: BAUD=9600 PARITY=n DATA=8 STOP=1 to=off dtr=off rts=off"); 
-      $fp = fopen("COM3", "w");
+    
 			switch($text){
 				case 'เปิดไฟ':
 				    // Build message to reply back
+            $verz="1.0";
+            exec("mode COM3: BAUD=9600 PARITY=n DATA=8 STOP=1 to=off dtr=off rts=off"); 
+            $fp = fopen("COM3", "w");
             fwrite($fp, "1");
-
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'เรียบร้อย'			
+							    ];
+            fclose($fp);
             
 				    break;
 				case 'ปิดไฟ':
@@ -50,7 +55,7 @@ if (!is_null($events['events'])) {
 					break;
 			}
 		}
-    fclose($fp);
+    
 		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
 			// Get text sent
 			$text = $event['message']['sticker'];
