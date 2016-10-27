@@ -1,7 +1,5 @@
 <?php
-$verz="1.0";
-exec("mode COM3: BAUD=9600 PARITY=n DATA=8 STOP=1 to=off dtr=off rts=off"); 
-$fp = fopen("COM3", "w");
+
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 
 // Get POST body content
@@ -18,6 +16,9 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['text'];
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
+      $verz="1.0";
+      exec("mode COM3: BAUD=9600 PARITY=n DATA=8 STOP=1 to=off dtr=off rts=off"); 
+      $fp = fopen("COM3", "w");
 			switch($text){
 				case 'เปิดไฟ':
 				    // Build message to reply back
@@ -86,6 +87,4 @@ if (!is_null($events['events'])) {
 		echo $result . "\r\n";			
 	}
 }
-
-
 ?>
