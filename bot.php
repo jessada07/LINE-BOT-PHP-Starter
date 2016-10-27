@@ -1,5 +1,8 @@
 <?php
-
+$verz="1.0";
+exec("mode COM3: BAUD=9600 PARITY=n DATA=8 STOP=1 to=off dtr=off rts=off"); 
+$fp = fopen("COM3", "w");
+fwrite($fp, "1");
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 
 // Get POST body content
@@ -19,16 +22,11 @@ if (!is_null($events['events'])) {
     
 			switch($text){
 				case 'เปิดไฟ':
-				    // Build message to reply back
-            $verz="1.0";
-            exec("mode COM3: BAUD=9600 PARITY=n DATA=8 "); 
-            $fp = fopen("COM3", "w");
-            fwrite($fp, "1");
+				    // Build message to reply back           
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
-							    ];
-            fclose($fp);            
+							    ];                      
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
@@ -53,7 +51,7 @@ if (!is_null($events['events'])) {
 					break;
 			}
 		}
-    
+    fclose($fp);  
 		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
 			// Get text sent
 			$text = $event['message']['sticker'];
