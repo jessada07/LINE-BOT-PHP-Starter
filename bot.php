@@ -21,15 +21,14 @@ if (!is_null($events['events'])) {
 				case 'เปิดไฟ':
 				    // Build message to reply back
             $verz="1.0";
-            exec("mode COM3: BAUD=9600 PARITY=n DATA=8 STOP=1 to=off dtr=off rts=off"); 
+            exec("mode COM3: BAUD=9600 PARITY=n DATA=8 "); 
             $fp = fopen("COM3", "w");
             fwrite($fp, "1");
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
 							    ];
-            fclose($fp);
-            
+            fclose($fp);            
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
@@ -37,8 +36,7 @@ if (!is_null($events['events'])) {
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
-							    ];
-            
+							    ];            
 				    break;
 				case 'อุณหภูมิ':
 				    // Build message to reply back
