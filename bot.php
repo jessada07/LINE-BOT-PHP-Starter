@@ -2,6 +2,9 @@
 
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 
+$port = fopen("COM3", "w"); //You have to check which port your Arduino is connected to and change this (this one is for Ubuntu and Arduino 2009)
+sleep(2);
+
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
@@ -16,22 +19,23 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['text'];
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
-    
 			switch($text){
 				case 'เปิดไฟ':
-				    // Build message to reply back           
+				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
-							    ];                      
+							    ];
+					  fwrite($port, "1");
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
-							    ];            
-				    break;
+							    ];
+					  fwrite($port, "0"); 
+				    break;				    
 				case 'อุณหภูมิ':
 				    // Build message to reply back
 				    $messages = [
@@ -47,6 +51,7 @@ if (!is_null($events['events'])) {
 					break;
 			}
 		}
+    fclose($port);
 		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
 			// Get text sent
 			$text = $event['message']['sticker'];
@@ -54,7 +59,7 @@ if (!is_null($events['events'])) {
 	        $replyToken = $event['replyToken'];
 			$random = rand(407,430);
 			$messages = [
-						 'type' => 'sticker',
+			'type' => 'sticker',
                          'packageId' => '1',
                          'stickerId' => $random
 						];
@@ -80,4 +85,5 @@ if (!is_null($events['events'])) {
 		echo $result . "\r\n";			
 	}
 }
+$serial->deviceClose();
 ?>
