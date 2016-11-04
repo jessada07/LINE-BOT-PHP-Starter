@@ -3,18 +3,9 @@
 $user = "mydata";    
 $pass = "1234";    
 $db = "testmydata";    
-mysql_connect($host, $user, $pass)
-mysql_select_db($db)
-mysql_query("SET NAMES utf8")*/
-
-$servername = "localhost";
-$username = "mydata";
-$password = "1234";
-$dbname = "testmydata";
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-    }
+mysql_connect($host, $user, $pass) or die("Could not connect to database"); 
+mysql_select_db($db) or die("Could not connect to database"); 
+mysql_query("SET NAMES utf8")
     
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
@@ -40,7 +31,7 @@ if (!is_null($events['events'])) {
 							     'text' => 'เรียบร้อย'			
 							    ];  
             $sql = "UPDATE temp SET temp = '1' WHERE id =1";
-            $conn->close();
+            $query = mysql_query($sql);
 
 				    break;
 				case 'ปิดไฟ':
