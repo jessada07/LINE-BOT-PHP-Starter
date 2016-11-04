@@ -12,7 +12,10 @@ $username = "mydata";
 $password = "1234";
 $dbname = "testmydata";
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+    }
+    
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
 $content = file_get_contents('php://input');
