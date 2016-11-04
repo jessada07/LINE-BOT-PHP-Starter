@@ -1,11 +1,11 @@
 <?php
-$host = "localhost";    
+/*$host = "localhost";    
 $user = "mydata";    
 $pass = "1234";    
 $db = "testmydata";    
 mysql_connect($host, $user, $pass)
 mysql_select_db($db)
-mysql_query("SET NAMES utf8")
+mysql_query("SET NAMES utf8")*/
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -29,7 +29,7 @@ if (!is_null($events['events'])) {
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
 							    ];  
-            $sql = "UPDATE temp SET temp = '1' WHERE id =1";
+            //$sql = "UPDATE temp SET temp = '1' WHERE id =1";
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
