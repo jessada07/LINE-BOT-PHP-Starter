@@ -77,7 +77,7 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		
     
-    $url = 'http://localhost/login_action.php';
+    $url = 'http://192.168.100.23/login_action.php';
     $request = 'username=guest&password=guest';
     $ch = curl_init(); // เริ่มต้นใช้งาน cURL
   
