@@ -60,11 +60,12 @@ if (!is_null($events['events'])) {
             $text = curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
             $obj = json_decode($text);
+            $mes = $obj->{'field1'}
             
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => $obj->{'field1'};
+							     'text' => $mes;
 							    ];
             
 				    break;
