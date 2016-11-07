@@ -28,6 +28,7 @@ if (!is_null($events['events'])) {
             $API_KEY = 'A636EPHK6T4XEIVP';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
             curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
             curl_exec( $curl_handle );
@@ -43,6 +44,7 @@ if (!is_null($events['events'])) {
             $API_KEY = 'A636EPHK6T4XEIVP';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
             curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
             curl_exec( $curl_handle );
@@ -52,6 +54,7 @@ if (!is_null($events['events'])) {
  
             $url = "http://api.thingspeak.com/channels/178792/feeds/last.json?api_key=A636EPHK6T4XEIVP";
             $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
             curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
             $text = curl_exec( $curl_handle );
