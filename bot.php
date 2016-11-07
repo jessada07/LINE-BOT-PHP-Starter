@@ -24,13 +24,15 @@ if (!is_null($events['events'])) {
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
 							    ];  
+            $request = '1'; 
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
 							     'text' => 'เรียบร้อย'			
-							    ];            
+							    ];  
+            $request = '0'; 
 				    break;
 				case 'อุณหภูมิ':
 				    // Build message to reply back
@@ -77,18 +79,15 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		
     
-    $url = 'http://192.168.100.23/login_action.php'; // กำหนด URl ของเว็บไวต์ B
-    $request = 'username=20'; // กำหนด HTTP Request โดยระบุ username=guest และ password=เguest (รูปแบบเหมือนการส่งค่า $_GET แต่ข้างหน้าข้อความไม่มีเครื่องหมาย ?)
-  
-    $ch = curl_init(); // เริ่มต้นใช้งาน cURL
-  
-    curl_setopt($ch, CURLOPT_URL, $url); // กำหนดค่า URL
-    curl_setopt($ch, CURLOPT_POST, true); // กำหนดรูปแบบการส่งข้อมูลเป็นแบบ $_POST
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $request); // กำหนดค่า HTTP Request
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, false); // กำหนดให้ cURL คืนค่าผลลัพท์
-  
-    $response = curl_exec($ch); // ประมวลผล cURL
-    curl_close($ch); // ปิดการใช้งาน cURL
+    $API_KEY = 'A636EPHK6T4XEIVP';
+
+    $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
+    $curl_handle = curl_init();
+    curl_setopt( $curl_handle, CURLOPT_URL, $url );
+    curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, 0);
+    curl_exec( $curl_handle );
+    curl_close( $curl_handle );
 	}
 }
 ?>
