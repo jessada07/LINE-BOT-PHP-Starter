@@ -56,7 +56,7 @@ if (!is_null($events['events'])) {
 							     'type' => 'text',
 							     'text' => 'ขณะนี้อุณหภูมิ'			
 							    ];
-            $url = 'http://192.168.99.184/login_action.php'; // กำหนด URl ของเว็บไวต์ B
+            $url = 'http://192.168.99.184:80/login_action.php'; // กำหนด URl ของเว็บไวต์ B
             $request = 'username=10'; // กำหนด HTTP Request โดยระบุ username=guest และ password=เguest (รูปแบบเหมือนการส่งค่า $_GET แต่ข้างหน้าข้อความไม่มีเครื่องหมาย ?)
   
             $ch = curl_init(); // เริ่มต้นใช้งาน cURL  
