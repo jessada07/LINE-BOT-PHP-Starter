@@ -28,7 +28,6 @@ if (!is_null($events['events'])) {
             $API_KEY = 'A636EPHK6T4XEIVP';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
-            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
             curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
             curl_exec( $curl_handle );
@@ -44,28 +43,27 @@ if (!is_null($events['events'])) {
             $API_KEY = 'A636EPHK6T4XEIVP';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
-            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
             curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
             curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
 				    break;
 				case 'อุณหภูมิ':
+ 
+            $url = "http://api.thingspeak.com/channels/178792/feeds/last.json?api_key=A636EPHK6T4XEIVP";
+            $curl_handle = curl_init();
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text);
+            
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => 'ขณะนี้อุณหภูมิ'			
+							     'text' => $obj->{'field1'};
 							    ];
-            $url = 'http://192.168.99.184:80/login_action.php'; // กำหนด URl ของเว็บไวต์ B
-            $request = 'username=10'; // กำหนด HTTP Request โดยระบุ username=guest และ password=เguest (รูปแบบเหมือนการส่งค่า $_GET แต่ข้างหน้าข้อความไม่มีเครื่องหมาย ?)
-  
-            $ch = curl_init(); // เริ่มต้นใช้งาน cURL  
-            curl_setopt($ch, CURLOPT_URL, $url); // กำหนดค่า URL
-            curl_setopt($ch, CURLOPT_POST, true); // กำหนดรูปแบบการส่งข้อมูลเป็นแบบ $_POST
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $request); // กำหนดค่า HTTP Request
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // กำหนดให้ cURL คืนค่าผลลัพท์  
-            curl_exec($ch); // ประมวลผล cURL
-            curl_close($ch); // ปิดการใช้งาน cURL
+            
 				    break;
   			    default:
 					$messages = [
