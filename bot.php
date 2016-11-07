@@ -79,6 +79,7 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		
     
+    $request = '1'; 
     $API_KEY = 'A636EPHK6T4XEIVP';
     $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
     $curl_handle = curl_init();
