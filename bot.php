@@ -25,6 +25,14 @@ if (!is_null($events['events'])) {
 							     'text' => 'เรียบร้อย'			
 							    ];  
             $request = '1'; 
+            $API_KEY = 'A636EPHK6T4XEIVP';
+            $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
 				    break;
 				case 'ปิดไฟ':
 				    // Build message to reply back
@@ -79,15 +87,7 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		
     
-    $request = '1'; 
-    $API_KEY = 'A636EPHK6T4XEIVP';
-    $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
-    $curl_handle = curl_init();
-    curl_setopt( $curl_handle, CURLOPT_URL, $url );
-    curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt( $curl_handle, CURLOPT_FOLLOWLOCATION, 1);
-    curl_exec( $curl_handle );
-    curl_close( $curl_handle );
+   
 	}
 }
 ?>
