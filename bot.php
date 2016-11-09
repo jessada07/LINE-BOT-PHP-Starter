@@ -65,7 +65,7 @@ if (!is_null($events['events'])) {
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => "ขณะนี้อุณหภูมิ  .$mes.  .&deg;C."
+							     'text' => "ขณะนี้อุณหภูมิ  $me.  &deg;C"
 							    ];
             
 				    break;
