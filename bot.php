@@ -61,12 +61,12 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text);
             $mes = $obj->{'field1'};
-            &temp = "ขณะนี้อุณหภูมิ  .$mes. &deg;C";
+            &temp = "ขณะนี้อุณหภูมิ  .$mes. ";
             
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => $mes
+							     'text' => $temp
 							    ];
             
 				    break;
