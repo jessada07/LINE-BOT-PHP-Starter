@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {
 	        $replyToken = $event['replyToken'];
     
 			switch($text){
-				case 'เปิดไฟ':
+				case 'เปิดพัดลม':
 				    // Build message to reply back           
 				    $messages = [
 							     'type' => 'text',
@@ -34,7 +34,7 @@ if (!is_null($events['events'])) {
             curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
 				    break;
-				case 'ปิดไฟ':
+				case 'ปิดพัดลม':
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
@@ -52,6 +52,24 @@ if (!is_null($events['events'])) {
 				    break;
 				case 'อุณหภูมิ':
  
+            $url = "http://api.thingspeak.com/channels/181033/feeds/last.json?api_key=L17TKCWDYRHVIRZR";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text);
+            $mes = $obj->{'field1'};
+            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => $mes
+							    ];
+            
+				    break;
+         case 'สถานะ': 
             $url = "http://api.thingspeak.com/channels/178792/feeds/last.json?api_key=A636EPHK6T4XEIVP";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -69,7 +87,7 @@ if (!is_null($events['events'])) {
 							    ];
             
 				    break;
-  			    default:
+  			  default:
 					$messages = [
 							     'type' => 'text',
 							     'text' => $text		
