@@ -61,7 +61,7 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text);
             $mes = $obj->{'field1'};
-            &temp = "ขณะนี้อุณหภูมิ";
+            &temp = "ขณะนี้อุณหภูมิ"  .$mes.";
             
 				    // Build message to reply back
 				    $messages = [
@@ -84,6 +84,7 @@ if (!is_null($events['events'])) {
                $mes = "พัดลมกำลังทำงาน...";
             }else{
                $mes = "พัดลมไม่ได้ทำงาน...";
+            }
             
 				    // Build message to reply back
 				    $messages = [
