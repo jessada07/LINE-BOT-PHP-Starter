@@ -22,7 +22,7 @@ if (!is_null($events['events'])) {
 				    // Build message to reply back           
 				    $messages = [
 							     'type' => 'text',
-							     'text' => 'เรียบร้อย'			
+							     'text' => 'เปิดการใช้งานพัดลม'			
 							    ];  
             $request = '1'; 
             $API_KEY = 'A636EPHK6T4XEIVP';
@@ -38,7 +38,7 @@ if (!is_null($events['events'])) {
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => 'เรียบร้อย'			
+							     'text' => 'ปิดการใช้งานพัดลม'			
 							    ];  
             $request = '0'; 
             $API_KEY = 'A636EPHK6T4XEIVP';
@@ -61,6 +61,7 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text);
             $mes = $obj->{'field1'};
+            &temp = "ขณะนี้อุณหภูมิ  .$mes. &deg;C";
             
 				    // Build message to reply back
 				    $messages = [
@@ -79,6 +80,10 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text);
             $mes = $obj->{'field1'};
+            if($mes == "1"){
+               $mes = "พัดลมกำลังทำงาน...";
+            }else{
+               $mes = "พัดลมไม่ได้ทำงาน...";
             
 				    // Build message to reply back
 				    $messages = [
