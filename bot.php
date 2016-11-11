@@ -55,7 +55,7 @@ if (!is_null($events['events'])) {
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => 'ปิดการใช้งานพัดลม'			
+							     'text' => 'เปิดการใช้งานอัตโนมัติ'			
 							    ];  
             $request = '2'; 
             $API_KEY = 'A636EPHK6T4XEIVP';
