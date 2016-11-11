@@ -50,8 +50,25 @@ if (!is_null($events['events'])) {
             curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
 				    break;
-				case 'อุณหภูมิ':
- 
+            
+        case 'อัตโนมัติ':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'ปิดการใช้งานพัดลม'			
+							    ];  
+            $request = '2'; 
+            $API_KEY = 'A636EPHK6T4XEIVP';
+            $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+				    break;
+            
+				case 'อุณหภูมิ': 
             $url = "http://api.thingspeak.com/channels/181033/feeds/last.json?api_key=L17TKCWDYRHVIRZR";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -81,8 +98,10 @@ if (!is_null($events['events'])) {
             $mes = $obj->{'field1'};
             if($mes == "1"){
                $mes = "พัดลมกำลังทำงาน...";
-            }else{
+            }elseif($mes == "0"){
                $mes = "พัดลมไม่ได้ทำงาน...";
+            }else{
+               $mes = "อัตโนมัติ";
             }
             
 				    // Build message to reply back
