@@ -69,7 +69,7 @@ if (!is_null($events['events'])) {
 				    break;
             
 				case 'อุณหภูมิ': 
-            $url = "http://api.thingspeak.com/channels/181033/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
+            $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -87,7 +87,7 @@ if (!is_null($events['events'])) {
             
 				    break;
          case 'สถานะ': 
-            $url = "http://api.thingspeak.com/channels/178792/feeds/last.json?api_key=FIV2UGQG1OAR6K65";
+            $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=FIV2UGQG1OAR6K65";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
