@@ -25,7 +25,7 @@ if (!is_null($events['events'])) {
 							     'text' => 'เปิดการใช้งานพัดลม'			
 							    ];  
             $request = '1'; 
-            $API_KEY = 'A636EPHK6T4XEIVP';
+            $API_KEY = 'FIV2UGQG1OAR6K65';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -41,7 +41,7 @@ if (!is_null($events['events'])) {
 							     'text' => 'ปิดการใช้งานพัดลม'			
 							    ];  
             $request = '0'; 
-            $API_KEY = 'A636EPHK6T4XEIVP';
+            $API_KEY = 'FIV2UGQG1OAR6K65';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -58,7 +58,7 @@ if (!is_null($events['events'])) {
 							     'text' => 'เปิดการใช้งานอัตโนมัติ'			
 							    ];  
             $request = '2'; 
-            $API_KEY = 'A636EPHK6T4XEIVP';
+            $API_KEY = 'FIV2UGQG1OAR6K65';
             $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -69,7 +69,7 @@ if (!is_null($events['events'])) {
 				    break;
             
 				case 'อุณหภูมิ': 
-            $url = "http://api.thingspeak.com/channels/181033/feeds/last.json?api_key=L17TKCWDYRHVIRZR";
+            $url = "http://api.thingspeak.com/channels/181033/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -87,7 +87,7 @@ if (!is_null($events['events'])) {
             
 				    break;
          case 'สถานะ': 
-            $url = "http://api.thingspeak.com/channels/178792/feeds/last.json?api_key=A636EPHK6T4XEIVP";
+            $url = "http://api.thingspeak.com/channels/178792/feeds/last.json?api_key=FIV2UGQG1OAR6K65";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt( $curl_handle, CURLOPT_URL, $url );
