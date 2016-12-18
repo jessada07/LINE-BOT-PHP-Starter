@@ -18,6 +18,7 @@ if (!is_null($events['events'])) {
 	        $replyToken = $event['replyToken'];
     
 			switch($text){
+        
 				case 'เปิดพัดลม':
 				    // Build message to reply back           
 				    $messages = [
@@ -108,6 +109,25 @@ if (!is_null($events['events'])) {
 				    $messages = [
 							     'type' => 'text',
 							     'text' => $mes
+							    ];
+            
+				    break;
+           case 'หาร้านอาหาร': 
+            $url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?location=13.8081935,100.0536584&radius=500&type=restaurant&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text);
+            $mes = $obj->{'place_id'}; 
+            
+            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "$mes"
 							    ];
             
 				    break;
