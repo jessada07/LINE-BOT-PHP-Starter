@@ -140,8 +140,8 @@ if (!is_null($events['events'])) {
 							     'type' => 'text',
 							     'text' => "$addname"
                   }, {
-                    "type":"text",
-                    "text":"เชิญเลือกร้าน"
+                    "type" => "text",
+                    "text" => "เชิญเลือกร้าน"
                    }
 					 ];
           break;
