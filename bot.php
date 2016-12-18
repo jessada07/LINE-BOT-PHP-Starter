@@ -122,7 +122,7 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text, TRUE);
             $mes = $obj['results'][0]['place_id']; 
-            familyname($mes);            
+            familyname($mes, $access_token);            
 				    break;
   			  default:
 					$messages = [
@@ -132,7 +132,7 @@ if (!is_null($events['events'])) {
 					break;
 			}
 		}
-    function familyName($mes) {
+    function familyName($mes, $access_token) {
         $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -165,6 +165,7 @@ if (!is_null($events['events'])) {
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		$result = curl_exec($ch);
 		url_close($ch);
+    echo $result . "\r\n";	
     }
 		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
 			// Get text sent
