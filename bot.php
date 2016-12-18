@@ -6,7 +6,7 @@ $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/s
 $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
-function familyName($mes, $access_token) {
+function familyName(&$mes) {
         $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
