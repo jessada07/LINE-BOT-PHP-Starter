@@ -131,12 +131,13 @@ if (!is_null($events['events'])) {
                $text = curl_exec( $curl_handle );
                curl_close( $curl_handle ); 
                $object = json_decode($text, TRUE);
-               $name .= $object['result']['name']\n; 
+               $name = $object['result']['name']; 
+               $addname .= $name."\n";
             }            
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
-							     'text' => "$name"
+							     'text' => "$addname"
 							    ];
           break;
   			  default:
