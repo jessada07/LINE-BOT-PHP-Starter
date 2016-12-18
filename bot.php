@@ -202,7 +202,7 @@ if (!is_null($events['events'])) {
 							     'text' => "$addname"
 					 ];
           break;
-          case 'หาอาบอบนวด': 
+          case 'หาสปา': 
             $url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?language=th&location=13.8081935,100.0536584&radius=1000&type=spa&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
             $curl_handle = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
