@@ -121,7 +121,7 @@ if (!is_null($events['events'])) {
             $text = curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
             $obj = json_decode($text, TRUE);
-            $mes = $obj['results']['place_id']; 
+            $mes = $obj['results']['place_id'][0]; 
             
             
 				    // Build message to reply back
