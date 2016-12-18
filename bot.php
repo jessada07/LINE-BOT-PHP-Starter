@@ -120,8 +120,8 @@ if (!is_null($events['events'])) {
             curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
             $text = curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
-            $obj = json_decode($text);
-            $mes = $obj->{'status'}; 
+            $obj = json_decode($text, TRUE);
+            $mes = $obj['results']['place_id']; 
             
             
 				    // Build message to reply back
