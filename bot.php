@@ -6,24 +6,8 @@ $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/s
 $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
-function familyName(&$mes) {
-        $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
-            $curl_handle = curl_init();
-            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt( $curl_handle, CURLOPT_URL, $url );
-            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-            $text = curl_exec( $curl_handle );
-            curl_close( $curl_handle ); 
-            $object = json_decode($text, TRUE);
-            $name = $object['result']['name']; 
-            
-            
-				    // Build message to reply back
-				    $messages = [
-							     'type' => 'text',
-							     'text' => "$name"
-							    ];
-        // Make a POST Request to Messaging API to reply to sender
+function familyName() {
+      // Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
 		        'replyToken' => $replyToken,
@@ -40,7 +24,7 @@ function familyName(&$mes) {
 		$result = curl_exec($ch);
 		url_close($ch);
     echo $result . "\r\n";	
-    }
+}
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
@@ -157,7 +141,23 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text, TRUE);
             $mes = $obj['results'][0]['place_id']; 
-            familyName($mes);            
+ 
+            $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $object = json_decode($text, TRUE);
+            $name = $object['result']['name'];           
+            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "$name"
+							    ];
+            familyName();  
 				    break;
   			  default:
 					$messages = [
