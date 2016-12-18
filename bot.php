@@ -121,18 +121,18 @@ if (!is_null($events['events'])) {
             $text = curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
             $obj = json_decode($text, TRUE);
-            $mes = $obj['results'][0]['place_id']; 
- 
-            $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
-            $curl_handle = curl_init();
-            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt( $curl_handle, CURLOPT_URL, $url );
-            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-            $text = curl_exec( $curl_handle );
-            curl_close( $curl_handle ); 
-            $object = json_decode($text, TRUE);
-            $name = $object['result']['name'];           
-            
+            for ($x = 0; $x <= 10; $x++) {
+               $mes = $obj['results'][$x]['place_id']; 
+               $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+               $curl_handle = curl_init();
+               curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+               curl_setopt( $curl_handle, CURLOPT_URL, $url );
+               curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+               $text = curl_exec( $curl_handle );
+               curl_close( $curl_handle ); 
+               $object = json_decode($text, TRUE);
+               $name .= $object['result']['name']; 
+            }            
 				    // Build message to reply back
 				    $messages = [
 							     'type' => 'text',
