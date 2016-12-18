@@ -157,7 +157,7 @@ if (!is_null($events['events'])) {
             curl_close( $curl_handle ); 
             $obj = json_decode($text, TRUE);
             $mes = $obj['results'][0]['place_id']; 
-            familyName($mes, $access_token);            
+            familyName($mes);            
 				    break;
   			  default:
 					$messages = [
