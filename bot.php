@@ -132,7 +132,8 @@ if (!is_null($events['events'])) {
                curl_close( $curl_handle ); 
                $object = json_decode($text, TRUE);
                $name = $object['result']['name']; 
-               $addname .= "->>".$name."\n";
+               $number = $object['result']['formatted_phone_number'];
+               $addname .= "->>".$name."\n".$number."\n\n";
             }            
 				    // Build message to reply back
 				    $messages = [
