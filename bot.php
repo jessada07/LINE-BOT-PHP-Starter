@@ -131,7 +131,7 @@ if (!is_null($events['events'])) {
             $text = curl_exec( $curl_handle );
             curl_close( $curl_handle ); 
             $object = json_decode($text, TRUE);
-            $name = $object['results']['name']; 
+            $name = $object['result']['name']; 
             
             
 				    // Build message to reply back
