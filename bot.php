@@ -242,16 +242,14 @@ if (!is_null($events['events'])) {
 		}
     
 		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter' && $event['beacon']['hwid'] == '0102545082'){
-			// Get text sent
-			$text = $event['message']['sticker'];
 			// Get replyToken
-	        $replyToken = $event['replyToken'];
-			$random = rand(407,430);
+			$replyToken = $event['replyToken'];
+
+			// Build message to reply back
 			$messages = [
-						 'type' => 'sticker',
-                         'packageId' => '1',
-                         'stickerId' => $random
-						];
+				'type' => 'text',
+				'text' => 'welcome'
+			];
 		}			
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
