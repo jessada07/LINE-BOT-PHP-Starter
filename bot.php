@@ -241,7 +241,7 @@ if (!is_null($events['events'])) {
 			}
 		}
     
-		if ($event['type'] == 'message' && $event['message']['type'] == 'sticker'){
+		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter' && $event['beacon']['hwid'] == '0102545082'){
 			// Get text sent
 			$text = $event['message']['sticker'];
 			// Get replyToken
