@@ -241,14 +241,14 @@ if (!is_null($events['events'])) {
 			}
 		}
     
-		if ($event['type'] == 'beacon'){
+		if ($event['type'] == 'beacon' && $event['beacon']['hwid'] == '0102545080'){
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => 'welcome'
+				'text' => 'welcome1'
 			];
 		}			
 		// Make a POST Request to Messaging API to reply to sender
