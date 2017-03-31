@@ -241,7 +241,7 @@ if (!is_null($events['events'])) {
 			}
 		}
     
-		if ($event['type'] == 'beacon' && $event['beacon']['hwid'] == "0102545080"){
+		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter'){
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
