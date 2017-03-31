@@ -10,7 +10,7 @@ if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
 		// Reply only when entered beacon range 
-		if ($event['type'] == 'beacon' && $event['bracon']['hwid'] == '0102545080' && $event['beacon']['type'] == 'enter') {
+		if ($event['type'] == 'beacon' && $event['beacon']['hwid'] == '0102545080' && $event['beacon']['type'] == 'enter') {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
