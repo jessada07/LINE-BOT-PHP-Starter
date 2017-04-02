@@ -28,11 +28,13 @@ if (!is_null($events['events'])) {
 					'actions' => [
               {
 							'type' => 'postback',
-							'label' => 'buy'
+							'label' => 'buy',
+              'url' => 'www.google.com'
               },
 						  {
 							'type' => 'postback',
-							'label' => 'not'
+							'label' => 'not',
+              'url' => 'www.google.com'
 						  }
 					 ]
 				 ]
