@@ -17,13 +17,32 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
 			// Build message to reply back
-			$messages = array('type' => 'template','altText' => 'This is a buttons template','template'=>array('type' => 'message','label' => 'Yes', 'text' => 'yes'));
+			$messages = [
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' => [
+					'type' => 'confirm',
+					'text' => 'Are you sure?',
+					'actions' => [
+              {
+							'type' => 'message',
+							'label' => 'Yes',
+              'text' => 'yes'
+              },
+						  {
+							'type' => 'message',
+							'label' => 'No',
+              'text' => 'no'
+						  }
+					 ]
+				 ]
+			];
 		}				
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
 		        'replyToken' => $replyToken,
-			      'messages' => $messages
+			      'messages' => [$messages]
 			    ];
 	    $post = json_encode($data);
 		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
