@@ -16,13 +16,7 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$buttons = [
 				'type' => 'template',
-				'altText' => 'This is a buttons template',
-				'template' => [
-					'type' => 'buttons',
-					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
-					'title' => 'Menu',
-					'text' => 'Please Select',
-				],
+				'altText' => 'This is a buttons template'
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
