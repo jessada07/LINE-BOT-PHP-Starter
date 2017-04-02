@@ -21,19 +21,18 @@ if (!is_null($events['events'])) {
 				'type' => 'template',
 				'altText' => 'This is a buttons template',
 				'template' => [
-					'type' => 'buttons',
-					'title' => 'Menu',
-					'text' => 'Please Select',
+					'type' => 'confirm',
+					'text' => 'Are you sure?',
 					'actions' => [
               {
-							'type' => 'uri',
-							'label' => 'buy',
-              'uri' => 'https://google.com'
+							'type' => 'message',
+							'label' => 'Yes',
+              'text' => 'yes'
               },
 						  {
-							'type' => 'uri',
-							'label' => 'not',
-              'uri' => 'https://google.com'
+							'type' => 'message',
+							'label' => 'No',
+              'text' => 'no'
 						  }
 					 ]
 				 ]
