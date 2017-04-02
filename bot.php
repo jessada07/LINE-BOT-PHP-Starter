@@ -28,12 +28,12 @@ if (!is_null($events['events'])) {
               {
 							'type' => 'postback',
 							'label' => 'buy',
-              'uri' => 'www.google.com'
+              'uri' => 'https://google.com'
               },
 						  {
 							'type' => 'postback',
 							'label' => 'not',
-              'uri' => 'www.google.com'
+              'uri' => 'https://google.com'
 						  }
 					 ]
 				 }
