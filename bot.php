@@ -24,12 +24,12 @@ if (!is_null($events['events'])) {
 					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
 					'title' => 'Menu',
 					'text' => 'Please Select',
-					'actions' => [$actions]
+					'actions' => $actions
       ];
 			$buttons = [
 				'type' => 'template',
 				'altText' => 'This is a buttons template',
-				'template' => [$template]
+				'template' => $template
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
