@@ -26,12 +26,12 @@ if (!is_null($events['events'])) {
 					'text' => 'Please Select',
 					'actions' => [
               {
-							'type' => 'postback',
+							'type' => 'uri',
 							'label' => 'buy',
               'uri' => 'https://google.com'
               },
 						  {
-							'type' => 'postback',
+							'type' => 'uri',
 							'label' => 'not',
               'uri' => 'https://google.com'
 						  }
