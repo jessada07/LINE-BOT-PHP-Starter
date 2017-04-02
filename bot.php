@@ -17,10 +17,26 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
 			// Build message to reply back
-			$messages = {
-				'type' => 'text',
-				'text' => 'leave beacon area!!!!'
-			};
+			$messages = [
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' =>[
+					'type' => 'buttons',
+					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
+					'title' => 'Menu',
+					'text' => 'Please Select',
+					'actions' => [
+              {
+							'type' => 'postback',
+							'label' => 'buy'
+              },
+						  {
+							'type' => 'postback',
+							'label' => 'not'
+						  }
+					 ]
+				 ]
+			];
 		}				
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
