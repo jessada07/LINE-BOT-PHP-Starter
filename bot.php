@@ -22,19 +22,18 @@ if (!is_null($events['events'])) {
 				'altText' => 'This is a buttons template',
 				'template' =>[
 					'type' => 'buttons',
-					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
 					'title' => 'Menu',
 					'text' => 'Please Select',
 					'actions' => [
               {
 							'type' => 'postback',
 							'label' => 'buy',
-              'url' => 'www.google.com'
+              'uri' => 'www.google.com'
               },
 						  {
 							'type' => 'postback',
 							'label' => 'not',
-              'url' => 'www.google.com'
+              'uri' => 'www.google.com'
 						  }
 					 ]
 				 ]
@@ -44,7 +43,7 @@ if (!is_null($events['events'])) {
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
 		        'replyToken' => $replyToken,
-			    'messages' => [$messages]
+			      'messages' => [$messages]
 			    ];
 	    $post = json_encode($data);
 		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
