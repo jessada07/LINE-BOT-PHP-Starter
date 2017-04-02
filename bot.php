@@ -22,16 +22,6 @@ if (!is_null($events['events'])) {
 					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
 					'title' => 'Menu',
 					'text' => 'Please Select',
-					'actions' => [
-						[
-							'type' => 'postback',
-							'label' => 'buy'
-						],
-						[
-							'type' => 'postback',
-							'label' => 'not'
-						],
-					],
 				],
 			];
 
