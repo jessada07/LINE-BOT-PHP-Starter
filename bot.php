@@ -1,5 +1,6 @@
 <?php
-$access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
+$access_token = ''W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
+
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
@@ -8,35 +9,22 @@ $events = json_decode($content, true);
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
-		// Reply only when message sent is in 'text' format
+		// Reply only when entered beacon range 
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-            // Get replyToken
+			// Get replyToken
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
-      $actions = [
-							'type' => 'postback',
-							'label' => 'buy'
-              'url' => 'www.google.com'
-			];
-      $template = [
-          'type' => 'buttons',
-					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
-					'title' => 'Menu',
-					'text' => 'Please Select',
-					'actions' => [$actions],
-      ];
-			$buttons = [
-				'type' => 'template',
-				'altText' => 'This is a buttons template',
-				'template' => [$template],
-			];
+			$messages = {
+				'type' => 'text',
+				'text' => 'welcome'
+			};
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => [$buttons],
+				'messages' => [$messages],
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
@@ -54,4 +42,4 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-?>
+echo "OK";
