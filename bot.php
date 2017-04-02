@@ -14,33 +14,22 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
-			$buttons = '{
-  "type": "template",
-  "altText": "this is a buttons template",
-  "template": {
-      "type": "buttons",
-      "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-      "title": "Menu",
-      "text": "Please select",
-      "actions": [
-          {
-            "type": "postback",
-            "label": "Buy",
-            "data": "action=buy&itemid=123"
-          },
-          {
-            "type": "postback",
-            "label": "Add to cart",
-            "data": "action=add&itemid=123"
-          },
-          {
-            "type": "uri",
-            "label": "View detail",
-            "uri": "http://example.com/page/123"
-          }
-      ]
-  }
-}';
+      $actions = [
+							'type' => 'postback',
+							'label' => 'buy'
+			];
+      $template = [
+          'type' => 'buttons',
+					'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
+					'title' => 'Menu',
+					'text' => 'Please Select',
+					'actions' => [$actions]
+      ];
+			$buttons = [
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' => [$template]
+			];
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
@@ -48,7 +37,7 @@ if (!is_null($events['events'])) {
 				'replyToken' => $replyToken,
 				'messages' => [$button],
 			];
-			$post = $data;
+			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
 			$ch = curl_init($url);
