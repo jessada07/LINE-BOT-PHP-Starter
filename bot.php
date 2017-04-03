@@ -19,24 +19,24 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = array(
 				'type' => 'template',
-				'altText' => 'This is a buttons template',
+				'altText' => "This is a buttons template",
 				'template' => array(
 					'type' => 'confirm',
-					'text' => 'Are you sure?',
+					'text' => "Are you sure?",
 					'actions' => array(
-              [0] => array(
+                          array(
 							'type' => 'message',
-							'label' => 'Yes',
+							'label' => "Yes",
               'text' => 'yes'
-              ),
-						  [1] => array(
+                     ),
+						  array(
 							'type' => 'message',
-							'label' => 'No',
+							'label' => "No",
               'text' => 'no'
 						  )
 					 )
 				 )
-			)
+			);
 		}				
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
