@@ -26,9 +26,9 @@ if (!is_null($events['events'])) {
 					'text' => 'Please select',
 					'actions' => array(
               array(
-							'type' => 'postback',
+							'type' => 'message',
 							'label' => 'Buy',
-              'data' => $idLine
+              'text' => $idLine
               ),
 						  array(
 							'type' => 'uri',
