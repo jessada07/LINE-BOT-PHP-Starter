@@ -15,7 +15,7 @@ if (!is_null($events['events'])) {
 			// Get text sent
 			$text = $event['message']['text'];      
 			// Get replyToken
-	        $replyToken = $event['replyToken'];
+	        $replyToken = $event['replyToken'];      
 			// Build message to reply back
 			$messages = array(
 				'type' => 'template',
@@ -41,8 +41,18 @@ if (!is_null($events['events'])) {
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
       // Get replyToken
 	    $replyToken = $event['replyToken'];
-      $userCode = $event['source']['userId'];
-      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$userCode;
+      $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
+      $curl_handle = curl_init();
+      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt( $curl_handle, CURLOPT_URL, $url );
+      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+      $text = curl_exec( $curl_handle );
+      curl_close( $curl_handle ); 
+      $obj = json_decode($text);
+      $mes = $obj->{'field1'}; 
+      $mes = $mes + 1;
+      
+      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes;
       $curl_handle = curl_init();
       curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -51,7 +61,7 @@ if (!is_null($events['events'])) {
       curl_close( $curl_handle );
       $messages = [
         'type' => 'text',
-        'text' => 'รหัสยืนยันตัวตน : '.$userCode
+        'text' => 'Queue ของคุณคือ   '.$mes
       ];
     }
     
