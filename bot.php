@@ -27,12 +27,12 @@ if (!is_null($events['events'])) {
 					'text' => "Please select",
 					'actions' => array(
               array(
-							'type' => 'postback',
+							'type' => 'uri',
 							'label' => 'Buy',
               'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=1'
                      ),
 						  array(
-							'type' => 'message',
+							'type' => 'uri',
 							'label' => 'Not',
               'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=0'
 						  )
