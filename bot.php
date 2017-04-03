@@ -14,6 +14,7 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			$text = $event['message']['text'];
+      $idLine - $event['message']['id'];
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
 			// Build message to reply back
@@ -27,7 +28,7 @@ if (!is_null($events['events'])) {
               array(
 							'type' => 'uri',
 							'label' => 'Buy',
-              'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=1'
+              'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$idLine
               ),
 						  array(
 							'type' => 'uri',
