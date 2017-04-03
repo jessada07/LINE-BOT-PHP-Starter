@@ -23,7 +23,7 @@ if (!is_null($events['events'])) {
 				'template' => array(
 					'type' => 'buttons',
           'thumbnailImageUrl' => 'http://www.nextdoorfitness.ro/mandate/images/promo1422012511.jpg',
-          'title' => 'Menu'
+          'title' => 'Menu',
 					'text' => "Please select",
 					'actions' => array(
               array(
