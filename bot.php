@@ -21,18 +21,20 @@ if (!is_null($events['events'])) {
 				'type' => 'template',
 				'altText' => "This is a buttons template",
 				'template' => array(
-					'type' => 'confirm',
-					'text' => "Are you sure?",
+					'type' => 'buttons',
+          'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
+          'title' => 'Menu'
+					'text' => "Please select",
 					'actions' => array(
-                          array(
-							'type' => 'message',
-							'label' => "Yes",
-              'text' => 'yes'
+              array(
+							'type' => 'postback',
+							'label' => 'Buy',
+              'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=1'
                      ),
 						  array(
 							'type' => 'message',
-							'label' => "No",
-              'text' => 'no'
+							'label' => 'Not',
+              'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=0'
 						  )
 					 )
 				 )
