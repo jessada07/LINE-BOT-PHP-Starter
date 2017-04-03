@@ -19,10 +19,10 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = array(
 				'type' => 'template',
-				'altText' => "This is a buttons template",
+				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
-          'thumbnailImageUrl' => 'https://example.com/bot/images/image.jpg',
+          'thumbnailImageUrl' => 'http://www.nextdoorfitness.ro/mandate/images/promo1422012511.jpg',
           'title' => 'Menu'
 					'text' => "Please select",
 					'actions' => array(
