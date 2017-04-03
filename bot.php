@@ -50,7 +50,7 @@ if (!is_null($events['events'])) {
       curl_exec( $curl_handle );
       curl_close( $curl_handle );
       $messages = [
-        'type' => 'message',
+        'type' => 'text',
         'text' => 'รหัสยืนยันตัวตน'.$userCode
       ];
     }
