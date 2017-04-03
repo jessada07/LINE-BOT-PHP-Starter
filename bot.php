@@ -22,15 +22,13 @@ if (!is_null($events['events'])) {
 				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
-          'thumbnailImageUrl' => 'http://www.nextdoorfitness.ro/mandate/images/promo1422012511.jpg',
-          'title' => 'Menu',
-					'text' => "Please select",
+					'text' => 'Please select',
 					'actions' => array(
               array(
 							'type' => 'uri',
 							'label' => 'Buy',
               'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=1'
-                     ),
+              ),
 						  array(
 							'type' => 'uri',
 							'label' => 'Not',
