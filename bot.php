@@ -13,8 +13,7 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$text = $event['message']['text'];
-      $idLine = $event['message']['id'];
+			$text = $event['message']['text'];      
 			// Get replyToken
 	        $replyToken = $event['replyToken'];
 			// Build message to reply back
@@ -26,19 +25,36 @@ if (!is_null($events['events'])) {
 					'text' => 'Please select',
 					'actions' => array(
               array(
-							'type' => 'message',
-							'label' => 'Buy',
-              'text' => $idLine
+							'type' => 'postback',
+							'label' => 'Order',
+              'data' => 'order'
               ),
 						  array(
-							'type' => 'uri',
-							'label' => 'Not',
-              'uri' => 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=0'
+							'type' => 'message',
+							'label' => 'Not Order',
+              'text' => 'Thank you.'
 						  )
 					 )
 				 )
 			);
-		}				
+		}			
+    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
+      // Get replyToken
+	    $replyToken = $event['replyToken'];
+      $userCode = $event['source']['userId'];
+      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$userCode;
+      $curl_handle = curl_init();
+      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt( $curl_handle, CURLOPT_URL, $url );
+      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+      curl_exec( $curl_handle );
+      curl_close( $curl_handle );
+      $messages = [
+        'type' => 'message',
+        'text' => 'รหัสยืนยันตัวตน'.$userCode
+      ];
+    }
+    
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
