@@ -22,8 +22,6 @@ if (!is_null($events['events'])) {
 				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
-          'thumbnailImageUrl' => 'http://www.pngall.com/wp-content/uploads/2016/04/Discount-PNG-Images.png',
-          'title' => 'discount',
 					'text' => 'Please select',
 					'actions' => array(
               array(
