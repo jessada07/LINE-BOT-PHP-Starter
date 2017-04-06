@@ -32,7 +32,7 @@ if (!is_null($events['events'])) {
 						  array(
 							'type' => 'message',
 							'label' => 'Cancle Order',
-              'text' => 'cancle'
+              'data' => 'cancle'
 						  ),
 					 )
 				 )
