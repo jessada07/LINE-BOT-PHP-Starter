@@ -31,9 +31,9 @@ if (!is_null($events['events'])) {
               ),
 						  array(
 							'type' => 'message',
-							'label' => 'Not Order',
-              'text' => 'Thank you.'
-						  )
+							'label' => 'Cancle Order',
+              'text' => 'cancle'
+						  ),
 					 )
 				 )
 			);
@@ -88,6 +88,20 @@ if (!is_null($events['events'])) {
       $messages = [
         'type' => 'text',
         'text' => 'Queue ของคุณคือ   '.$mes
+      ];
+    }
+    
+    if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancle') {
+      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=cancle'+.$mes;
+      $curl_handle = curl_init();
+      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt( $curl_handle, CURLOPT_URL, $url );
+      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+      curl_exec( $curl_handle );
+      curl_close( $curl_handle );
+      $messages = [
+        'type' => 'text',
+        'text' => 'ทำการยกเลิกคิวเรียบร้อย'
       ];
     }
     
