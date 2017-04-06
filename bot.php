@@ -85,11 +85,9 @@ if (!is_null($events['events'])) {
       curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
       curl_exec( $curl_handle );
       curl_close( $curl_handle );
-      $messages = array(
-        array('type' => 'text',
-              'text' => 'Queue ของคุณคือ   '.$mes),
-        array('type' => 'text',
-              'text' => 'ยกเลิกพิมคำว่า ยกเลิก ตามด้วยเลขคิว')        
+      $messages =
+        'type' => 'text',
+        'text' => 'Queue ของคุณคือ   '.$mes
       );
     }
         
