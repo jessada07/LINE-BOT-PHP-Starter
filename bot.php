@@ -85,10 +85,10 @@ if (!is_null($events['events'])) {
       curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
       curl_exec( $curl_handle );
       curl_close( $curl_handle );
-      $messages =
-        'type' => 'text',
-        'text' => 'Queue ของคุณคือ   '.$mes
-      );
+      $messages = [
+          'type' => 'text',
+          'text' => 'Queue ของคุณคือ   '.$mes
+      ];
     }
         
 		// Make a POST Request to Messaging API to reply to sender
