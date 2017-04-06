@@ -30,7 +30,7 @@ if (!is_null($events['events'])) {
               'data' => 'order'
               ),
 						  array(
-							'type' => 'message',
+							'type' => 'postback',
 							'label' => 'Cancle Order',
               'data' => 'cancle'
 						  ),
