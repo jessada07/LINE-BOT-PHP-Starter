@@ -30,9 +30,9 @@ if (!is_null($events['events'])) {
               'data' => 'order'
               ),
 						  array(
-							'type' => 'postback',
-							'label' => 'Cancle Order',
-              'data' => 'cancle'
+							'type' => 'message',
+							'label' => 'Help',
+              'data' => 'คุณสามารถจองคิวได้เฉพาะหน้าร้านเท่านั้นโดยกดคำว่า Order'
 						  ),
 					 )
 				 )
@@ -85,26 +85,15 @@ if (!is_null($events['events'])) {
       curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
       curl_exec( $curl_handle );
       curl_close( $curl_handle );
-      $messages = [
-        'type' => 'text',
-        'text' => 'Queue ของคุณคือ   '.$mes
-      ];
+      $messages = array(
+        array('type' => 'text',
+              'text' => 'Queue ของคุณคือ   '.$mes),
+        array('type' => 'text',
+              'text' => 'ยกเลิกพิมคำว่า ยกเลิก ตามด้วยเลขคิว'),
+        
+      );
     }
-    
-    if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancle') {
-      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=cancle';
-      $curl_handle = curl_init();
-      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt( $curl_handle, CURLOPT_URL, $url );
-      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-      curl_exec( $curl_handle );
-      curl_close( $curl_handle );
-      $messages = [
-        'type' => 'text',
-        'text' => 'ทำการยกเลิกคิวเรียบร้อย'
-      ];
-    }
-    
+        
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
