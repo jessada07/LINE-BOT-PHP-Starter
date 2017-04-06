@@ -92,7 +92,7 @@ if (!is_null($events['events'])) {
     }
     
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancle') {
-      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=cancle'+.$mes;
+      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=cancle'.$mes;
       $curl_handle = curl_init();
       curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt( $curl_handle, CURLOPT_URL, $url );
