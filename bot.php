@@ -13,59 +13,235 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$text = $event['message']['text'];      
+			$text = $event['message']['text'];
 			// Get replyToken
-	        $replyToken = $event['replyToken'];      
-			// Build message to reply back
-			$messages = array(
-				'type' => 'template',
-				'altText' => 'This is a buttons template',
-				'template' => array(
-					'type' => 'buttons',
-					'text' => 'Please select',
-					'actions' => array(
-              array(
-							'type' => 'postback',
-							'label' => 'Order',
-              'data' => 'order'
-              ),
-						  array(
-							'type' => 'message',
-							'label' => 'Help',
-              'text' => '‡∏Ñ‡∏∏‡∏ì‡∏™‡∏≤‡∏°‡∏≤‡∏£‡∏ñ‡∏à‡∏≠‡∏á‡∏Ñ‡∏¥‡∏ß‡πÑ‡∏î‡πâ‡πÄ‡∏â‡∏û‡∏≤‡∏∞‡∏´‡∏ô‡πâ‡∏≤‡∏£‡πâ‡∏≤‡∏ô‡πÄ‡∏ó‡πà‡∏≤‡∏ô‡∏±‡πâ‡∏ô‡πÇ‡∏î‡∏¢‡∏Å‡∏î‡∏Ñ‡∏≥‡∏ß‡πà‡∏≤ Order'
-						  )
-					 )
-				 )
-			);
-		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
-      // Get replyToken
-	    $replyToken = $event['replyToken'];
-      $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
-      $curl_handle = curl_init();
-      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt( $curl_handle, CURLOPT_URL, $url );
-      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-      $text = curl_exec( $curl_handle );
-      curl_close( $curl_handle ); 
-      $obj = json_decode($text);
-      $mes = $obj->{'field1'}; 
-      $mes = $mes + 1;
-      
-      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes;
-      $curl_handle = curl_init();
-      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt( $curl_handle, CURLOPT_URL, $url );
-      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-      curl_exec( $curl_handle );
-      curl_close( $curl_handle );
-      $messages = [
-          'type' => 'text',
-          'text' => 'Queue ‡∏Ç‡∏≠‡∏á‡∏Ñ‡∏∏‡∏ì‡∏Ñ‡∏∑‡∏≠   '.$mes
-      ];
-    }
+	        $replyToken = $event['replyToken'];
+    
+			switch($text){
         
-    if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter'){
+				case '‡ª‘¥æ—¥≈¡':
+				    // Build message to reply back           
+				    $messages = [
+							     'type' => 'text',
+							     'text' => '‡ª‘¥°“√„™Èß“πæ—¥≈¡'			
+							    ];  
+            $request = '1'; 
+            $API_KEY = 'FIV2UGQG1OAR6K65';
+            $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+				    break;
+				case 'ª‘¥æ—¥≈¡':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => 'ª‘¥°“√„™Èß“πæ—¥≈¡'			
+							    ];  
+            $request = '0'; 
+            $API_KEY = 'FIV2UGQG1OAR6K65';
+            $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+				    break;
+            
+        case 'Õ—µ‚π¡—µ‘':
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => '‡ª‘¥°“√„™Èß“πÕ—µ‚π¡—µ‘'			
+							    ];  
+            $request = '2'; 
+            $API_KEY = 'FIV2UGQG1OAR6K65';
+            $url = "http://api.thingspeak.com/update?key=".$API_KEY."&field1=".$request;
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+				    break;
+            
+				case 'Õÿ≥À¿Ÿ¡‘': 
+            $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text);
+            $mes = $obj->{'field1'}; 
+            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "¢≥–π’ÈÕÿ≥À¿Ÿ¡‘  $mes  C"
+							    ];
+            
+				    break;
+         case ' ∂“π–': 
+            $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=FIV2UGQG1OAR6K65";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text);
+            $mes = $obj->{'field1'};
+            if($mes == "1"){
+               $mes = "æ—¥≈¡°”≈—ß∑”ß“π...";
+            }elseif($mes == "0"){
+               $mes = "æ—¥≈¡‰¡Ë‰¥È∑”ß“π...";
+            }else{
+               $mes = "Õ—µ‚π¡—µ‘";
+            }
+            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => $mes
+							    ];
+            
+				    break;
+           case 'À“√È“πÕ“À“√': 
+            $url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?language=th&location=13.8081935,100.0536584&radius=500&type=restaurant&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text, TRUE);
+            for ($x = 0; $x <= 10; $x++) {
+               $mes = $obj['results'][$x]['place_id']; 
+               $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+               $curl_handle = curl_init();
+               curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+               curl_setopt( $curl_handle, CURLOPT_URL, $url );
+               curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+               $text = curl_exec( $curl_handle );
+               curl_close( $curl_handle ); 
+               $object = json_decode($text, TRUE);
+               $name = $object['result']['name']; 
+               $number = $object['result']['formatted_phone_number'];
+               $address = $object['result']['formatted_address'];
+               $addname .= "->>".$name."\n".$number."\n".$address."\n\n";
+            }            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "$addname"
+					 ];
+          break;
+          case 'À“‚√ßæ¬“∫“≈': 
+            $url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?language=th&location=13.8081935,100.0536584&radius=10000&type=hospital&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text, TRUE);
+            for ($x = 0; $x <= 10; $x++) {
+               $mes = $obj['results'][$x]['place_id']; 
+               $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+               $curl_handle = curl_init();
+               curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+               curl_setopt( $curl_handle, CURLOPT_URL, $url );
+               curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+               $text = curl_exec( $curl_handle );
+               curl_close( $curl_handle ); 
+               $object = json_decode($text, TRUE);
+               $name = $object['result']['name']; 
+               $number = $object['result']['formatted_phone_number'];
+               $address = $object['result']['formatted_address'];
+               $addname .= "->>".$name."\n".$number."\n".$address."\n\n";
+            }            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "$addname"
+					 ];
+          break;
+          case 'À“‡Õ∑’‡ÕÁ¡': 
+            $url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?language=th&location=13.8081935,100.0536584&radius=500&type=atm&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text, TRUE);
+            for ($x = 0; $x <= 10; $x++) {
+               $mes = $obj['results'][$x]['place_id']; 
+               $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+               $curl_handle = curl_init();
+               curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+               curl_setopt( $curl_handle, CURLOPT_URL, $url );
+               curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+               $text = curl_exec( $curl_handle );
+               curl_close( $curl_handle ); 
+               $object = json_decode($text, TRUE);
+               $name = $object['result']['name']; 
+               $number = $object['result']['formatted_phone_number'];
+               $address = $object['result']['formatted_address'];
+               $addname .= "->>".$name."\n".$address."\n\n";
+            }            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "$addname"
+					 ];
+          break;
+          case 'À“ ª“': 
+            $url = "https://maps.googleapis.com/maps/api/place/radarsearch/json?language=th&location=13.8081935,100.0536584&radius=1000&type=spa&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+            $curl_handle = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt( $curl_handle, CURLOPT_URL, $url );
+            curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+            $text = curl_exec( $curl_handle );
+            curl_close( $curl_handle ); 
+            $obj = json_decode($text, TRUE);
+            for ($x = 0; $x <= 10; $x++) {
+               $mes = $obj['results'][$x]['place_id']; 
+               $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$mes&key=AIzaSyBEA0UcZj9m-fYvwGTx0aoITGJxyWLdGm4";
+               $curl_handle = curl_init();
+               curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+               curl_setopt( $curl_handle, CURLOPT_URL, $url );
+               curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+               $text = curl_exec( $curl_handle );
+               curl_close( $curl_handle ); 
+               $object = json_decode($text, TRUE);
+               $name = $object['result']['name']; 
+               $number = $object['result']['formatted_phone_number'];
+               $address = $object['result']['formatted_address'];
+               $addname .= "->>".$name."\n".$number."\n".$address."\n\n";
+            }            
+				    // Build message to reply back
+				    $messages = [
+							     'type' => 'text',
+							     'text' => "$addname"
+					 ];
+          break;
+  			  default:
+					$messages = [
+							     'type' => 'text',
+							     'text' => $text		
+							    ];
+					break;
+			}
+		}
+    
+		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter'){
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
@@ -74,15 +250,24 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => 'beacon area!!!!'
 			];
-		}
-    
+		}		
+		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'leave'){
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+
+			// Build message to reply back
+			$messages = [
+				'type' => 'text',
+				'text' => 'leave beacon area!!!!'
+			];
+		}				
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
 		        'replyToken' => $replyToken,
-			      'messages' => [$messages]
+			    'messages' => [$messages]
 			    ];
-	  $post = json_encode($data);
+	    $post = json_encode($data);
 		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
