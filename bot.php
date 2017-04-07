@@ -92,7 +92,18 @@ if (!is_null($events['events'])) {
       ];
     }
     */
-        
+    
+    if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter'){
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+
+			// Build message to reply back
+			$messages = [
+				'type' => 'text',
+				'text' => 'beacon area!!!!'
+			];
+		}
+    
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
 	    $data = [
