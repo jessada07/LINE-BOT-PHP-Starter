@@ -38,7 +38,7 @@ if (!is_null($events['events'])) {
 				 )
 			);
 		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
+    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order' && $event['beacon']['type'] == 'enter') {
       // Get replyToken
 	    $replyToken = $event['replyToken'];
       $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
