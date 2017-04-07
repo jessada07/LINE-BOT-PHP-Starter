@@ -38,7 +38,8 @@ if (!is_null($events['events'])) {
 				 )
 			);
 		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order' && $event['beacon']['type'] == 'enter') {
+    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
+    if ($event['type'] == 'beacon'){
       // Get replyToken
 	    $replyToken = $event['replyToken'];
       $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
@@ -63,6 +64,14 @@ if (!is_null($events['events'])) {
           'type' => 'text',
           'text' => 'Queue ของคุณคือ   '.$mes
       ];
+      }
+      else {
+          $messages = [
+          'type' => 'text',
+          'text' => 'คุณไม่ได้อยู่ในพื้นที่ที่กำหนด'
+      ];
+      
+      }
     }
     
 		// Make a POST Request to Messaging API to reply to sender
