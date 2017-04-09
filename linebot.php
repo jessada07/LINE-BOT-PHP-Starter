@@ -3,10 +3,31 @@ $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/s
 
 $to ='U1afc8417a53546990d662f7319e981e6';
 
-			$messages = [
-				'type' => 'text',
-				'text' => 'hello'
-			];
+			// Get text sent
+			$text = $event['message']['text'];      
+			// Get replyToken
+	        $replyToken = $event['replyToken'];      
+			// Build message to reply back
+			$messages = array(
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' => array(
+					'type' => 'buttons',
+					'text' => 'Please select',
+					'actions' => array(
+              array(
+							'type' => 'postback',
+							'label' => 'Order',
+              'data' => 'order'
+              ),
+						  array(
+							'type' => 'message',
+							'label' => 'Help',
+              'text' => ' Help : คุณสามารถจองคิวได้เฉพาะหน้าร้านเท่านั้นโดยกดคำว่า Order'
+						  )
+					 )
+				 )
+			);
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/push';
