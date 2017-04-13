@@ -38,7 +38,7 @@ if (!is_null($events['events'])) {
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
       // Get replyToken
-      $status = $event['beacon']['type']; 
+      //$status = $event['beacon']['type']; 
 	    $replyToken = $event['replyToken'];
       $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
       $curl_handle = curl_init();
@@ -60,7 +60,7 @@ if (!is_null($events['events'])) {
       curl_close( $curl_handle );
       $messages = [
           'type' => 'text',
-          'text' => 'Queue ของคุณคือ   '.$status
+          'text' => 'Queue ของคุณคือ   '.$mes
       ];
     }
     
