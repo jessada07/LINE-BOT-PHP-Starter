@@ -20,7 +20,7 @@ if (!is_null($events['events'])) {
 				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
-					'text' => 'Please select',
+					'text' => 'ระบบจองคิว',
 					'actions' => array(
               array(
 							'type' => 'postback',
@@ -38,6 +38,7 @@ if (!is_null($events['events'])) {
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
       // Get replyToken
+      $status = $event['beacon']['type']; 
 	    $replyToken = $event['replyToken'];
       $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
       $curl_handle = curl_init();
@@ -59,7 +60,7 @@ if (!is_null($events['events'])) {
       curl_close( $curl_handle );
       $messages = [
           'type' => 'text',
-          'text' => 'Queue ของคุณคือ   '.$mes
+          'text' => 'Queue ของคุณคือ   '.$status
       ];
     }
     
