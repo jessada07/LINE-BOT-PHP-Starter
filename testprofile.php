@@ -5,7 +5,7 @@ $to ='U1afc8417a53546990d662f7319e981e6';
 
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '$secret']);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
 $response = $bot->getProfile($to);
 if ($response->isSucceeded()) {
     $profile = $response->getJSONDecodedBody();
