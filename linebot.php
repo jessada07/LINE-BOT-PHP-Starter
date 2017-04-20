@@ -13,11 +13,11 @@
     $obj = json_decode($text);
     $to = $obj->{'field2'}; 
 
-    $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('$access_token');
-    $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '$secret']);
+    $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
+    $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
 
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-    $response = $bot->pushMessage('$to', $textMessageBuilder);
+    $response = $bot->pushMessage($to, $textMessageBuilder);
 
     echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 ?>
