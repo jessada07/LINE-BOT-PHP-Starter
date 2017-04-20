@@ -46,5 +46,5 @@
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		$result = curl_exec($ch);
 		url_close($ch);
-		echo 'ok';		 
+		echo $result . "\r\n";		 
 ?>
