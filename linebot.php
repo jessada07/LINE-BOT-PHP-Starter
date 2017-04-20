@@ -22,18 +22,13 @@
 				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
-					'text' => 'ระบบจองคิว',
+					'text' => 'ถึงคิวของคุณ',
 					'actions' => array(
               array(
 							'type' => 'postback',
-							'label' => 'Order',
-              'data' => 'order'
-              ),
-						  array(
-							'type' => 'message',
-							'label' => 'Help',
-              'text' => 'คุณสามารถจองคิวได้เฉพาะหน้าร้านเท่านั้นโดยกดคำว่า Order'
-						  )
+							'label' => 'Cancel',
+              'data' => 'cancel'
+              )
 					 )
 				 )
 			);
