@@ -23,15 +23,13 @@
 					'type' => 'buttons',
 					'text' => 'ถึงคิวของคุณ',
 					'actions' => array(
-              array(
 							'type' => 'postback',
 							'label' => 'Cancel',
               'data' => 'cancel'
-              )
 					 )
 				 )
 		);
-    $response = $bot->pushMessage($to, $textMessageBuilder);
+    $response = $bot->pushMessage($to, json_encode($textMessageBuilder));
 
     echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 ?>
