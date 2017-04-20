@@ -17,7 +17,7 @@
     $to = $obj->{'field2'}; 
 
    // Build message to reply back
-			$messages = array(
+		/*	$messages = array(
 				'type' => 'template',
 				'altText' => 'This is a buttons template',
 				'template' => array(
@@ -46,5 +46,5 @@
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		$result = curl_exec($ch);
 		url_close($ch);
-		echo $result . "\r\n";		 
+		echo $result . "\r\n";		 */
 ?>
