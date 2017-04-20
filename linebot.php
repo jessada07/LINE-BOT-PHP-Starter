@@ -1,7 +1,7 @@
 <?php
     $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 
-   /* $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
+    $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
     $curl_handle = curl_init();
     curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -10,7 +10,7 @@
     curl_close( $curl_handle ); 
     $obj = json_decode($text);
     $to = $obj->{'field2'}; 
-    */
+    
     // Build message to reply back
 			$messages = array(
 				'type' => 'template',
