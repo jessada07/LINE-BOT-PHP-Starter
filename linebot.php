@@ -47,3 +47,4 @@
 		$result = curl_exec($ch);
 		url_close($ch);
 		echo $result . "\r\n";		 
+?>
