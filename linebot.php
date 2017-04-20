@@ -1,7 +1,5 @@
 <?php
-    require __DIR__  . '/vendor/autoload.php';
     $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
-    $secret ='3b44899e97cacf93240d4112b87ac873';
     
     // Get POST body content
     $content = file_get_contents('php://input');
@@ -22,6 +20,7 @@
 				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
+          'thumbnailImageUrl' => 'http://dl.profile.line-cdn.net/0hrn51KX1xLUEISAPRl85SFjQNIyx_ZisJcH1lJikdJ3kkfW9HZChhdXlOJHVxL29EY3tgdS0cc3Ul',
 					'text' => 'ถึงคิวของคุณ',
 					'actions' => array(
               array(
