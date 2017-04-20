@@ -16,7 +16,21 @@
     $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
     $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
 
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+    $textMessageBuilder = array(
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' => array(
+					'type' => 'buttons',
+					'text' => 'ถึงคิวของคุณ',
+					'actions' => array(
+              array(
+							'type' => 'postback',
+							'label' => 'Cancel',
+              'data' => 'cancel'
+              )
+					 )
+				 )
+		);
     $response = $bot->pushMessage($to, $textMessageBuilder);
 
     echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
