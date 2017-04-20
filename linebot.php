@@ -15,7 +15,28 @@
     curl_close( $curl_handle ); 
     $obj = json_decode($text);
     $to = $obj->{'field2'}; 
-
+    
+    // Build message to reply back
+			$messages = array(
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' => array(
+					'type' => 'buttons',
+					'text' => 'ระบบจองคิว',
+					'actions' => array(
+              array(
+							'type' => 'postback',
+							'label' => 'Order',
+              'data' => 'order'
+              ),
+						  array(
+							'type' => 'message',
+							'label' => 'Help',
+              'text' => 'คุณสามารถจองคิวได้เฉพาะหน้าร้านเท่านั้นโดยกดคำว่า Order'
+						  )
+					 )
+				 )
+			);
    // Build message to reply back
 		/*	$messages = array(
 				'type' => 'template',
