@@ -24,8 +24,8 @@
 					'actions' => array(
               array(
 							'type' => 'postback',
-							'label' => 'Cancel',
-              'data' => 'Cancel My Queue'
+							'label' => 'Cancel My Queue',
+              'data' => 'cancel'
               )
 					 )
 				 )
