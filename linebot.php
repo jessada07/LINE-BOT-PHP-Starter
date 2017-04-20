@@ -24,11 +24,9 @@
 					'type' => 'buttons',
 					'text' => 'ถึงคิวของคุณ',
 					'actions' => array(
-              array(
 							'type' => 'postback',
 							'label' => 'Cancel',
               'data' => 'cancel'
-              )
 					 )
 				 )
 			);

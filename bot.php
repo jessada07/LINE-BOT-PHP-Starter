@@ -78,7 +78,6 @@ if (!is_null($events['events'])) {
       curl_close( $curl_handle ); 
       $obj = json_decode($text);
       $mes = $obj->{'field1'}; 
-      $mes = $mes + 1;
       
       $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=cancel&field3='.$user_id;
       $curl_handle = curl_init();
