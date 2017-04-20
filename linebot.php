@@ -20,7 +20,6 @@
 				'altText' => 'This is a buttons template',
 				'template' => array(
 					'type' => 'buttons',
-          'thumbnailImageUrl' => 'http://dl.profile.line-cdn.net/0hrn51KX1xLUEISAPRl85SFjQNIyx_ZisJcH1lJikdJ3kkfW9HZChhdXlOJHVxL29EY3tgdS0cc3Ul',
 					'text' => 'ถึงคิวของคุณ',
 					'actions' => array(
               array(
