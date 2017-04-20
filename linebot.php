@@ -32,24 +32,10 @@
 					 )
 				 )
 			);
-   // Build message to reply back
-		/*	$messages = array(
-				'type' => 'template',
-				'altText' => 'This is a buttons template',
-				'template' => array(
-					'type' => 'buttons',
-					'text' => 'ถึงคิวของคุณ',
-					'actions' => array(
-							'type' => 'postback',
-							'label' => 'Cancel',
-              'data' => 'cancel'
-					 )
-				 )
-			);
       // Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/push';
 	    $data = [
-		        'replyToken' => $to,
+		        'to' => $to,
 			      'messages' => [$messages]
 			    ];
 	  $post = json_encode($data);
@@ -62,5 +48,5 @@
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		$result = curl_exec($ch);
 		url_close($ch);
-		echo $result . "\r\n";		 */
+		echo $result . "\r\n";		 
 ?>
