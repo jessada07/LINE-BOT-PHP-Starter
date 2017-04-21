@@ -9,6 +9,13 @@ $events = json_decode($content, true);
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
+    if($event['type'] == 'beacon' && $check_order == '1') {
+      $messages = [
+          'type' => 'text',
+          'text' => 'success'
+      ];
+      $check_order = '0';
+    }
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
 			// Get text sent
