@@ -9,7 +9,7 @@ $events = json_decode($content, true);
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
-    if($event['type'] == 'beacon' && $check_order == '1') {
+    if($event['type'] == 'beacon') {
       $replyToken = $event['replyToken'];
       $messages = [
           'type' => 'text',
