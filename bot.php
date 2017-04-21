@@ -2,20 +2,20 @@
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
 $content = file_get_contents('php://input');
-$check_order = '0';
+//$check_order = '0';
 // Parse JSON
 $events = json_decode($content, true);
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
-    if($event['type'] == 'beacon' && $check_order == '1') {
+   /* if($event['type'] == 'beacon' && $check_order == '1') {
       $messages = [
           'type' => 'text',
           'text' => 'success'
       ];
       $check_order = '0';
-    }
+    }*/
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
 			// Get text sent
