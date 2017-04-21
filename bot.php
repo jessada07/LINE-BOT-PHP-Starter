@@ -69,6 +69,7 @@ if (!is_null($events['events'])) {
       //$status = $event['beacon']['type']; 
       $user_id = $event['source']['userId'];
 	    $replyToken = $event['replyToken'];
+      check_beacon($replyToken);
       $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
       $curl_handle = curl_init();
       curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -110,5 +111,36 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		   
 	}
+}
+
+function check_beacon($replyToken){
+    if (!is_null($events['events'])) {
+	    // Loop through each event
+	    foreach ($events['events'] as $event) {
+        if ($event['type'] == 'beacon') {
+            $messages = [
+              'type' => 'text',
+              'text' => 'success'
+          ];
+          // Make a POST Request to Messaging API to reply to sender
+	        $url = 'https://api.line.me/v2/bot/message/reply';
+	        $data = [
+		            'replyToken' => $replyToken,
+			          'messages' => [$messages]
+			        ];
+	      $post = json_encode($data);
+		    $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+		    $ch = curl_init($url);
+		    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		    $result = curl_exec($ch);
+		    url_close($ch);
+		    echo $result . "\r\n";		
+        }
+      }
+    }
 }
 ?>
