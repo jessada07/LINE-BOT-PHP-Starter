@@ -45,7 +45,7 @@ if (!is_null($events['events'])) {
 			);
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
-      $check_order = '1';
+      //$check_order = '1';
       // Get replyToken
       $user_id = $event['source']['userId'];
 	    $replyToken = $event['replyToken'];
