@@ -7,7 +7,6 @@ $events = json_decode($content, true);
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
-	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
 			// Get text sent
@@ -37,6 +36,7 @@ if (!is_null($events['events'])) {
 			);
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
+      if($event['type']== 'beacon'){
       // Get replyToken
       //$status = $event['beacon']['type']; 
       $user_id = $event['source']['userId'];
@@ -64,6 +64,7 @@ if (!is_null($events['events'])) {
           'type' => 'text',
           'text' => 'Queue ของคุณคือ   '.$mes
       ];
+    }
     }
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
       // Get replyToken
@@ -111,36 +112,4 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		   
 	}
-}
-
-function check_beacon($replyToken){
-    if (!is_null($events['events'])) {
-	    // Loop through each event
-	    foreach ($events['events'] as $event) {
-        if ($event['type'] == 'beacon') {
-            $messages = [
-              'type' => 'text',
-              'text' => 'success'
-          ];
-          // Make a POST Request to Messaging API to reply to sender
-	        $url = 'https://api.line.me/v2/bot/message/reply';
-	        $data = [
-		            'replyToken' => $replyToken,
-			          'messages' => [$messages]
-			        ];
-	      $post = json_encode($data);
-		    $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-		    $ch = curl_init($url);
-		    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-		    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		    $result = curl_exec($ch);
-		    url_close($ch);
-		    echo $result . "\r\n";		
-        }
-      }
-    }
-}
 ?>
