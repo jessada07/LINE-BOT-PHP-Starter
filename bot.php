@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {
       $check_order = '0';
     }
 		// Reply only when message sent is in 'text' format
-		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
+		/*if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
 			// Get text sent
 			$text = $event['message']['text'];      
 			// Get replyToken
@@ -44,7 +44,7 @@ if (!is_null($events['events'])) {
 					 )
 				 )
 			);
-		}			
+		}*/			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
       // Get replyToken
       $user_id = $event['source']['userId'];
