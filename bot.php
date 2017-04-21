@@ -38,7 +38,6 @@ if (!is_null($events['events'])) {
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
       // Get replyToken
-      //$status = $event['beacon']['type']; 
       $user_id = $event['source']['userId'];
 	    $replyToken = $event['replyToken'];
       $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
@@ -66,10 +65,8 @@ if (!is_null($events['events'])) {
     }
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
       // Get replyToken
-      //$status = $event['beacon']['type']; 
       $user_id = $event['source']['userId'];
 	    $replyToken = $event['replyToken'];
-      check_beacon($replyToken);
       $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
       $curl_handle = curl_init();
       curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
