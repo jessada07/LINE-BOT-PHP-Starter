@@ -35,10 +35,10 @@ if (!is_null($events['events'])) {
 					 )
 				 )
 			);
-      $check_order = '1';
+      $check_order = 1;
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
-      if($check_order === '1'){
+      if($check_order == 1){
         // Get replyToken
         $user_id = $event['source']['userId'];
 	      $replyToken = $event['replyToken'];
@@ -64,7 +64,7 @@ if (!is_null($events['events'])) {
             'type' => 'text',
             'text' => 'Queue ของคุณคือ   '.$mes
         ];
-        $check_order ='0';
+        $check_order =0;
       }
     }
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
