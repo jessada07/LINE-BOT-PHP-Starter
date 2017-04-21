@@ -9,16 +9,16 @@ $events = json_decode($content, true);
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
-    if($event['type'] == 'beacon') {
+    /*if($event['type'] == 'beacon' && $check_order == '1') {
       $replyToken = $event['replyToken'];
       $messages = [
           'type' => 'text',
           'text' => 'success'
       ];
       $check_order = '0';
-    }
+    }*/
 		// Reply only when message sent is in 'text' format
-		/*if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
+		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
 			// Get text sent
 			$text = $event['message']['text'];      
 			// Get replyToken
@@ -28,7 +28,7 @@ if (!is_null($events['events'])) {
 				'type' => 'template',
 				'altText' => 'This is a buttons template',
 				'template' => array(
-					'type' => 'buttons',
+					'type' => 'confirm',
 					'text' => 'ระบบจองคิว',
 					'actions' => array(
               array(
@@ -44,7 +44,7 @@ if (!is_null($events['events'])) {
 					 )
 				 )
 			);
-		}*/			
+		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
       // Get replyToken
       $user_id = $event['source']['userId'];
