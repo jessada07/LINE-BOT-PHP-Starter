@@ -48,10 +48,10 @@ if (!is_null($events['events'])) {
         $text = curl_exec( $curl_handle );
         curl_close( $curl_handle ); 
         $obj = json_decode($text);
-        $mes = $obj->{'field1'}; 
+        $mes = $obj->{'field4'}; 
         $mes = $mes + 1;
       
-        $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=booking&field3='.$user_id;
+        $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=booking&field3='.$user_id.'&field4='.$mes;;
         $curl_handle = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt( $curl_handle, CURLOPT_URL, $url );
