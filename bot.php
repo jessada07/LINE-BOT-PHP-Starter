@@ -73,8 +73,7 @@ if (!is_null($events['events'])) {
       $text = curl_exec( $curl_handle );
       curl_close( $curl_handle ); 
       $obj = json_decode($text);
-      $mes = $obj->{'field4'}; 
-      $mes = $mes;
+      $last = $obj->{'field4'}; 
       
       $user_id = $event['source']['userId'];
 	    $replyToken = $event['replyToken'];
@@ -88,7 +87,7 @@ if (!is_null($events['events'])) {
       $obj = json_decode($text);
       $mes = $obj->{'field1'}; 
       
-      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=cancel&field3='.$user_id.'&field4='.$mes;
+      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=cancel&field3='.$user_id.'&field4='.$last;
       $curl_handle = curl_init();
       curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt( $curl_handle, CURLOPT_URL, $url );
