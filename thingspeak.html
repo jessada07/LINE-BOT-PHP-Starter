@@ -150,12 +150,20 @@
                 } else {
                     alert('Success : ' + data);
                     document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
-                    window.open("https://thawing-inlet-67202.herokuapp.com/linebot.php");
+                    $.getJSON("https://thawing-inlet-67202.herokuapp.com/linebot.php");
                 }
             });
         }
         function delete_queue(obj) {
             document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
+        }
+        function add_queue() {
+            var table = document.getElementById("output");
+            var lastRowIndex = table.rows.length - 1;
+            var lastCell = table.rows[lastRowIndex].cells[1];
+            var number_queue = parseInt(lastCell.innerHTML, 10) + 1;
+            console.log(number_queue);
+            $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + number_queue + '&field2=booking&field3=admin&field4=' + number_queue);
         }
     </script>
 </head>
@@ -202,6 +210,9 @@
                     <div class="col-lg-6">
                         <button type="button" class="btn btn-primary" onclick="playPause(this)" id="start">
                             <span class="glyphicon glyphicon-play"></span>
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="add_queue()">
+                            Add Queue
                         </button>
                     </div>
                 </div>
