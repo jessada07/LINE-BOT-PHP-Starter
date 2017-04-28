@@ -34,7 +34,7 @@
             // save to local storage
             localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             // set default inputs
             $('#channel').val(thingspeak['channel']);
             $('#read_api_key').val(thingspeak['read_api_key']);
@@ -42,7 +42,7 @@
                 $('#start').find(".glyphicon").removeClass("glyphicon-play").addClass("glyphicon-pause");
             }
             // when inputs change update params and clear output
-            $( ".form-control" ).change(function(input) {
+            $(".form-control").change(function (input) {
                 // update params
                 thingspeak['channel'] = $('#channel').val();
                 thingspeak['read_api_key'] = $('#read_api_key').val();
@@ -57,7 +57,7 @@
                 // start updates
                 getUpdates();
                 // check for new updates
-                updates = setInterval('getUpdates()',5000);
+                updates = setInterval('getUpdates()', 5000);
             }
         });
         function getUpdates() {
@@ -84,7 +84,7 @@
                 // if the field1 has data update the page
                 if (data.feeds) {
                     // go through each feed and add it to the top of the table if the row does not exist
-                    $.each( data.feeds, function( i, feed ) {
+                    $.each(data.feeds, function (i, feed) {
                         // add entry to table if it does not exist
                         if ($('#output').find('#entry_' + feed.entry_id).length === 0) {
                             // create a new blank row
@@ -101,9 +101,8 @@
                             }
                             if (feed.hasOwnProperty('field3')) {
                                 var data_field3 = feed.field3;
-                                console.log(data_field3);
-                                $new_row.append("<td>" + feed.field3 + "</td>");
-                                $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"send_queue('+ feed.field1 +',\'' + data_field3 +'\',this)"' + "style=" + '"background-color:#00CC33"' + ">Send</button>");
+                                $new_row.append("<td>" + "user id" + "</td>");
+                                $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"send_queue(' + feed.field1 + ',\'' + data_field3 + '\',this)"' + "style=" + '"background-color:#00CC33"' + ">Send</button>");
                                 $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"delete_queue(this)"' + "style=" + '"background-color:#FF0033"' + ">Delete</button>");
                             }
                             // add the row to the table
@@ -112,7 +111,7 @@
                             $new_row.css('background-color', '#efe');
                             // remove the background color after 500ms
                             // css transitions are used with the feed-row class to make this smooth
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 $new_row.css('background-color', '');
                             }, 500);
                         }
@@ -139,17 +138,17 @@
                 // start updates
                 getUpdates();
                 // check for new updates
-                updates = setInterval('getUpdates()',5000);
+                updates = setInterval('getUpdates()', 5000);
             }
             // save to local storage
             localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
         }
         function send_queue(r, userId, obj) {
-            $.getJSON(thingspeak['url'] + '/update?api_key=FIV2UGQG1OAR6K65&field1=' + r + '&field2='+ userId, function (data) {
+            $.getJSON(thingspeak['url'] + '/update?api_key=FIV2UGQG1OAR6K65&field1=' + r + '&field2=' + userId, function (data) {
                 if (data == '0') {
                     alert('error!!!!!!!');
                 } else {
-                    alert('Success : ' + data);                    
+                    alert('Success : ' + data);
                     document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
                     window.open("https://thawing-inlet-67202.herokuapp.com/linebot.php");
                 }
@@ -210,7 +209,7 @@
 
             <div class="panel-body">
                 <h1 id="header"></h1>
-                <table class="table table-striped" id="output" style="width:100%"></table>
+                <table class="table table-striped" id="output"></table>
             </div>
         </div>
     </div>
