@@ -61,8 +61,6 @@ if (!is_null($events['events'])) {
 		if($messager == $code){
 			// Get replyToken
 			$user_id = $event['source']['userId'];
-			session_start();
-           $_SESSION['regName'] = $user_id;
 			$replyToken = $event['replyToken'];
 			$url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
 			$curl_handle = curl_init();
@@ -75,7 +73,7 @@ if (!is_null($events['events'])) {
 			$mes = $obj->{'field4'}; 
 			$mes = $mes + 1;
       
-			$url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=booking&field3='.$user_id.'&field4='.$mes.'&field5='.$profile['displayName'].'&field6='.$profile['pictureUrl'];
+			$url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=booking&field3='.$user_id.'&field4='.$mes;//'&field5='.$profile['displayName'].'&field6='.$profile['pictureUrl'];
 			$curl_handle = curl_init();
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -152,7 +150,3 @@ if (!is_null($events['events'])) {
 	}
 }
 ?>
-<form method="get" action="testprofile.php">
-    <input type="text" name="regName" value="">
-    <input type="submit">
-</form>
