@@ -4,7 +4,8 @@ $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/s
 $secret ='3b44899e97cacf93240d4112b87ac873';
 $to ='U1afc8417a53546990d662f7319e981e6';
 
-
+function get_username(){
+$to ='U1afc8417a53546990d662f7319e981e6';
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
 $response = $bot->getProfile($to);
@@ -14,5 +15,7 @@ if ($response->isSucceeded()) {
     echo $profile['pictureUrl'];
     echo $profile['statusMessage'];
 }
+}
+
 
 ?>
