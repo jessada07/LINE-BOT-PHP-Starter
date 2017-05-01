@@ -1,6 +1,4 @@
 <?php
-require __DIR__  . '/vendor/autoload.php';
-$secret ='3b44899e97cacf93240d4112b87ac873';
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -63,7 +61,8 @@ if (!is_null($events['events'])) {
 		if($messager == $code){
 			// Get replyToken
 			$user_id = $event['source']['userId'];
-			$profile = get_user($user_id);
+			session_start();
+           $_SESSION['regName'] = $user_id;
 			$replyToken = $event['replyToken'];
 			$url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
 			$curl_handle = curl_init();
@@ -152,17 +151,8 @@ if (!is_null($events['events'])) {
 		echo $result . "\r\n";		   
 	}
 }
-
-function get_user($user_id){
-	$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
-	$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
-	$response = $bot->getProfile($user_id);
-	if ($response->isSucceeded()) {
-		$profile = $response->getJSONDecodedBody();
-		echo $profile['displayName'];
-		echo $profile['pictureUrl'];
-		echo $profile['statusMessage'];
-	}
-	return $profile;
-}
 ?>
+<form method="get" action="testprofile.php">
+    <input type="text" name="regName" value="">
+    <input type="submit">
+</form>
