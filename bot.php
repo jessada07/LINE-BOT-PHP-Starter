@@ -85,14 +85,14 @@ if (!is_null($events['events'])) {
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
 		} else {
+			$replyToken = $event['replyToken'];
 			$messages = [
 				'type' => 'text',
-				'text' => 'หมดเวลาในการจอง'
-			];
-		
+				'text' => 'ขออภัยหมดเวลาในการจอง'
+			];		
 		}
-
     }
+
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
       // Get replyToken
       $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
