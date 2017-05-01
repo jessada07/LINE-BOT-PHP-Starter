@@ -61,6 +61,16 @@ if (!is_null($events['events'])) {
         $messager = $object->{'field1'}; 
 
 		if($messager == $code){
+			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
+			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
+			$response = $bot->getProfile($user_id);
+			if ($response->isSucceeded()) {
+				$profile = $response->getJSONDecodedBody();
+				echo $profile['displayName'];
+				echo $profile['pictureUrl'];
+				echo $profile['statusMessage'];
+			}
+
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			$replyToken = $event['replyToken'];
@@ -75,7 +85,7 @@ if (!is_null($events['events'])) {
 			$mes = $obj->{'field4'}; 
 			$mes = $mes + 1;
       
-			$url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=booking&field3='.$user_id.'&field4='.$mes;
+			$url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=booking&field3='.$user_id.'&field4='.$mes.'&field5='.$profile['displayName'].'&field6='.$profile['pictureUrl'];;
 			$curl_handle = curl_init();
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -86,17 +96,6 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
-
-			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
-			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
-			$response = $bot->getProfile($user_id);
-			if ($response->isSucceeded()) {
-				$profile = $response->getJSONDecodedBody();
-				echo $profile['displayName'];
-				echo $profile['pictureUrl'];
-				echo $profile['statusMessage'];
-			}
-
 		} else {
 			$replyToken = $event['replyToken'];
 			$messages = [
