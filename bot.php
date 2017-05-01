@@ -84,6 +84,12 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
+		} else {
+			$messages = [
+				'type' => 'text',
+				'text' => 'หมดเวลาในการจอง'
+			];
+		
 		}
 
     }
