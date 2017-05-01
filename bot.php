@@ -57,7 +57,7 @@ if (!is_null($events['events'])) {
         $object = json_decode($text);
         $messager = $object->{'field1'}; 
 
-		if($messager == $event['postback']['data']){
+		if($messager == '1111'){
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			  $replyToken = $event['replyToken'];
