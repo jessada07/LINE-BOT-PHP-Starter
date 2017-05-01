@@ -5,12 +5,12 @@ $secret ='3b44899e97cacf93240d4112b87ac873';
 $to ='U1afc8417a53546990d662f7319e981e6';
 
 
-$profile = get_user($to);
+get_user();
 
-function get_user(&$user_id){
+function get_user(){
 	$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
 	$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
-	$response = $bot->getProfile($user_id);
+	$response = $bot->getProfile($to);
 	if ($response->isSucceeded()) {
 		$profile = $response->getJSONDecodedBody();
 		echo $profile['displayName'];
