@@ -17,7 +17,6 @@ function get_user(){
 		echo $profile['pictureUrl'];
 		echo $profile['statusMessage'];
 	}
-	return $profile;
 }
 
 ?>
