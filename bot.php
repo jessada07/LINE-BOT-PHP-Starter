@@ -10,6 +10,16 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
+			$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
+			$curl_handle = curl_init();
+			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt( $curl_handle, CURLOPT_URL, $url );
+			curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+			$text = curl_exec( $curl_handle );
+			curl_close( $curl_handle ); 
+			$object = json_decode($text);
+			$messager = $object->{'field1'}; 
+
 			// Get text sent
 			$text = $event['message']['text'];      
 			// Get replyToken
@@ -22,21 +32,21 @@ if (!is_null($events['events'])) {
 					'type' => 'confirm',
 					'text' => 'ระบบจองคิว',
 					'actions' => array(
-              array(
+						  array(
 							'type' => 'postback',
-							'label' => 'Order',
-              'data' => 'order'
-              ),
+							'label'=> 'Order',
+							'data' => $messager
+						  ),
 						  array(
 							'type' => 'message',
-							'label' => 'Help',
-              'text' => 'คุณสามารถจองคิวได้เฉพาะหน้าร้านเท่านั้นโดยกดคำว่า Order'
+							'label'=> 'Help',
+							'text' => 'คุณสามารถจองคิวได้เฉพาะหน้าร้านเท่านั้นโดยกดคำว่า Order'
 						  )
 					 )
 				 )
 			);
 		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] == 'order') {
+    if ($event['type'] == 'postback' && $event['postback']['data'] !== 'cancel') {
 		$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
         $curl_handle = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -47,7 +57,7 @@ if (!is_null($events['events'])) {
         $object = json_decode($text);
         $messager = $object->{'field1'}; 
 
-		if($messager == '1110'){
+		if($messager == $event['postback']['data']){
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			  $replyToken = $event['replyToken'];
