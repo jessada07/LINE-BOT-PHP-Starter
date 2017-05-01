@@ -1,4 +1,6 @@
 <?php
+require __DIR__  . '/vendor/autoload.php';
+$secret ='3b44899e97cacf93240d4112b87ac873';
 $access_token = 'W+X36trYjmT3J3MwxGH0eVwYFEiJIN/MUhRKS4NkOAVjMjS1iy43ja//nWUu3/sVjyDheG3kYnZS23ZGunisgNyCs86RynE/NclW0ibHkFoiIJKrnqrIL4ean0c7rvDYAWx+JzG5yv/cvfuzze0G6QdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -84,6 +86,17 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
+
+			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
+			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
+			$response = $bot->getProfile($user_id);
+			if ($response->isSucceeded()) {
+				$profile = $response->getJSONDecodedBody();
+				echo $profile['displayName'];
+				echo $profile['pictureUrl'];
+				echo $profile['statusMessage'];
+			}
+
 		} else {
 			$replyToken = $event['replyToken'];
 			$messages = [
@@ -106,7 +119,7 @@ if (!is_null($events['events'])) {
       $last = $obj->{'field4'}; 
       
       $user_id = $event['source']['userId'];
-	    $replyToken = $event['replyToken'];
+	  $replyToken = $event['replyToken'];
       $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
       $curl_handle = curl_init();
       curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
