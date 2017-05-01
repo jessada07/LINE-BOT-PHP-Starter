@@ -47,6 +47,7 @@ if (!is_null($events['events'])) {
 			);
 		}			
     if ($event['type'] == 'postback' && $event['postback']['data'] !== 'cancel') {
+	    $code = $event['postback']['data'];
 		$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
         $curl_handle = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
@@ -57,10 +58,10 @@ if (!is_null($events['events'])) {
         $object = json_decode($text);
         $messager = $object->{'field1'}; 
 
-		if($messager == '1111'){
+		if($messager == $code){
 			// Get replyToken
 			$user_id = $event['source']['userId'];
-			  $replyToken = $event['replyToken'];
+			$replyToken = $event['replyToken'];
 			$url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
 			$curl_handle = curl_init();
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
