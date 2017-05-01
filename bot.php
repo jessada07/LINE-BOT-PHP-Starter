@@ -61,18 +61,9 @@ if (!is_null($events['events'])) {
         $messager = $object->{'field1'}; 
 
 		if($messager == $code){
-			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
-			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
-			$response = $bot->getProfile($user_id);
-			if ($response->isSucceeded()) {
-				$profile = $response->getJSONDecodedBody();
-				echo $profile['displayName'];
-				echo $profile['pictureUrl'];
-				echo $profile['statusMessage'];
-			}
-
 			// Get replyToken
 			$user_id = $event['source']['userId'];
+			$profile = get_user($user_id);
 			$replyToken = $event['replyToken'];
 			$url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
 			$curl_handle = curl_init();
@@ -160,5 +151,18 @@ if (!is_null($events['events'])) {
 		url_close($ch);
 		echo $result . "\r\n";		   
 	}
+}
+
+function get_user(){
+	$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
+	$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
+	$response = $bot->getProfile($user_id);
+	if ($response->isSucceeded()) {
+		$profile = $response->getJSONDecodedBody();
+		echo $profile['displayName'];
+		echo $profile['pictureUrl'];
+		echo $profile['statusMessage'];
+	}
+	return $profile;
 }
 ?>
