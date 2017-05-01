@@ -47,7 +47,7 @@ if (!is_null($events['events'])) {
         $object = json_decode($text);
         $messager = $object->{'field1'}; 
 
-		if($messager == '1111'){
+		if($messager == '1110'){
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			  $replyToken = $event['replyToken'];
