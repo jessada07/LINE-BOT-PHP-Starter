@@ -16,6 +16,6 @@ if ($response->isSucceeded()) {
     echo $profile['statusMessage'];
 }
 }
-
+get_username();
 
 ?>
