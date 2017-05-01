@@ -153,7 +153,7 @@ if (!is_null($events['events'])) {
 	}
 }
 
-function get_user(){
+function get_user($user_id){
 	$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
 	$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $secret]);
 	$response = $bot->getProfile($user_id);
