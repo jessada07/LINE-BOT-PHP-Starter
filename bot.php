@@ -46,7 +46,7 @@ if (!is_null($events['events'])) {
 				 )
 			);
 		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] != 'cancel') {
+    if ($event['type'] == 'postback' && $event['postback']['data'] !== 'cancel') {
 		$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
         $curl_handle = curl_init();
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
