@@ -158,12 +158,16 @@
             document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
         }
         function add_queue() {
-            var table = document.getElementById("output");
-            var lastRowIndex = table.rows.length - 1;
-            var lastCell = table.rows[lastRowIndex].cells[1];
-            var number_queue = parseInt(lastCell.innerHTML, 10) + 1;
-            console.log(number_queue);
-            $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + number_queue + '&field2=booking&field3=admin&field4=' + number_queue);
+            //var table = document.getElementById("output");
+            //var lastRowIndex = table.rows.length - 1;
+            //var lastCell = table.rows[lastRowIndex].cells[1];
+            //var number_queue = parseInt(lastCell.innerHTML, 10) + 1;
+            //console.log(number_queue);
+            $.getJSON('http://api.thingspeak.com/channels/202503/feed/last.json?api_key=0QJTN9QPAXWCI68I', function (data) {
+                get_last = data.field1;
+                console.log(get_last);
+            });
+            $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + get_last + '&field2=booking&field3=admin&field4=' + get_last);
         }
     </script>
 </head>
