@@ -38,14 +38,14 @@
     <div id="container">
         <canvas id="canvas" width="600" height="300" style=" border:5px solid #F0F8FF; background: #F8F8FF" opacity:"0.5"></canvas>
     </div>
-    <script>
+    <script type="text/javascript">
         var c = document.getElementById("canvas");
-        var ctx = c.getContext("2d"); 
+        var ctx = c.getContext("2d");
         var get_last = '0';
         // setup time for updates
         var updates = null;
         getUpdates();
-        updates = setInterval('getUpdates()',5000);
+        updates = setInterval('getUpdates()', 5000);
         function getUpdates() {
             console.log('start');
             $.getJSON('http://api.thingspeak.com/channels/202503/feed/last.json?api_key=0QJTN9QPAXWCI68I', function (data) {
@@ -65,6 +65,6 @@
                 ctx.fillText(data.field1, 280, 150);
             });
         }
-   </script>
+    </script>
 </body>
 </html>
