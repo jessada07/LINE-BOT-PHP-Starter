@@ -2,10 +2,185 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IoT Debugger - Home</title>
+    <title>Queue Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="icon" href="mylogo2.png">
+
+    <style type="text/css">
+        .feed-row {
+            transition: background-color 2s ease;
+        }
+    </style>
+
+    <script type="text/javascript">
+        // setup time for updates
+        var updates = null;
+        // setup IoT service details and defaults
+        var thingspeak = {};
+        var new_row;
+        // check local storage for thingspeak
+        if (localStorage.getItem('thingspeak')) {
+            thingspeak = JSON.parse(localStorage.getItem('thingspeak'));
+        }
+        else {
+            // set thingspeak
+            thingspeak['url'] = 'https://api.thingspeak.com';
+            thingspeak['channel'] = '202503';
+            thingspeak['read_api_key'] = 'TR269KF9LCXRK7RV';
+            //thingspeak['results'] = '10';
+            thingspeak['start'] = false;
+            // save to local storage
+            localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
+        }
+        $(document).ready(function () {
+            // set default inputs
+            $('#channel').val(thingspeak['channel']);
+            $('#read_api_key').val(thingspeak['read_api_key']);
+            if (thingspeak['start']) {
+                $('#start').find(".glyphicon").removeClass("glyphicon-play").addClass("glyphicon-pause");
+            }
+            // when inputs change update params and clear output
+            $(".form-control").change(function (input) {
+                // update params
+                thingspeak['channel'] = $('#channel').val();
+                thingspeak['read_api_key'] = $('#read_api_key').val();
+                // save to local storage
+                localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
+                // clear output
+                $('#header').html('');
+                $('#output').html('');
+            });
+            // start updates if play button is active
+            if (thingspeak['start']) {
+                // start updates
+                getUpdates();
+                // check for new updates
+                updates = setInterval('getUpdates()', 5000);
+            }
+        });
+        function getUpdates() {
+            // get the data with a webservice call
+            $.getJSON(thingspeak['url'] + '/channels/' + thingspeak['channel'] + '/feed.json?results=' + '1' + '&timezone=Asia%2FBangkok' + '&api_key=' + thingspeak['read_api_key'], function (data) {
+                // create table and headers if channel object exists
+                if (data.channel) {
+                    // set headers
+                    $('#header').html('<b>' + data.channel.name + '</b>');
+                    // create table head and body if they do not exist
+                    if ($('#output').find('thead').length == 0) {
+                        // add head to output table
+                        $('#output').append("<thead><tr></tr></thead>");
+                        // add date/time field as header
+                        $('#output').find('thead').append("<th>Update Time</th>");
+                        // add header for each field
+                        if (data.channel.hasOwnProperty('field1')) { $('#output').find('thead').append("<th>Queue</th>"); }
+                        if (data.channel.hasOwnProperty('field2')) { $('#output').find('thead').append("<th>Status</th>"); }
+                        if (data.channel.hasOwnProperty('field3')) { $('#output').find('thead').append("<th>User Type</th>");; }
+                        // add body to output table
+                        $('#output').append("<tbody></tbody>");
+                    }
+                }
+                // if the field1 has data update the page
+                if (data.feeds) {
+                    // go through each feed and add it to the top of the table if the row does not exist
+                    $.each(data.feeds, function (i, feed) {
+                        // add entry to table if it does not exist
+                        if ($('#output').find('#entry_' + feed.entry_id).length === 0) {
+                            // create a new blank row
+                            $new_row = $("<tr id='entry_" + feed.entry_id + "' class='feed-row'></tr>");
+                            // add time/date data to field
+                            $new_row.append("<td  width=40%><time datetime='" + feed.created_at + "'>" + feed.created_at + "</time></td>");
+                            // add field data to each field
+                            if (feed.hasOwnProperty('field1')) {
+                                //$new_row.append("<td width=30%>" + feed.field1 + "</td>");
+                                $new_row.append("<td>" + feed.field1 + "</td>");
+                            }
+                            if (feed.hasOwnProperty('field2')) {
+                                $new_row.append("<td>" + feed.field2 + "</td>");
+                            }
+                            if (feed.hasOwnProperty('field3')) {
+                                var data_field3 = feed.field3;
+                                if (data_field3 != 'admin') {
+                                    data_field3 = 'user';
+                                }
+                                $new_row.append("<td>" + data_field3 + "</td>");
+                                $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"send_queue(' + feed.field1 + ',\'' + data_field3 + '\',this)"' + "style=" + '"background-color:#00CC33"' + ">Send</button>");
+                                $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"delete_queue(this)"' + "style=" + '"background-color:#FF0033"' + ">Delete</button>");
+                            }
+                            // add the row to the table
+                            $('#output').prepend($new_row);
+                            // set the background color to green
+                            $new_row.css('background-color', '#efe');
+                            // remove the background color after 500ms
+                            // css transitions are used with the feed-row class to make this smooth
+                            setTimeout(function () {
+                                $new_row.css('background-color', '');
+                            }, 500);
+                        }
+                    });
+                }
+            });
+        }
+        // start / stop updates
+        function playPause(button) {
+            // switch button state and start or stop updates
+            if ($(button).find(".glyphicon").hasClass("glyphicon-pause")) {
+                // show play button state
+                $(button).find(".glyphicon").removeClass("glyphicon-pause").addClass("glyphicon-play");
+                // update params
+                thingspeak['start'] = false;
+                // stop updates
+                clearInterval(updates);
+            }
+            else {
+                // show pause button state
+                $(button).find(".glyphicon").removeClass("glyphicon-play").addClass("glyphicon-pause");
+                // update params
+                thingspeak['start'] = true;
+                var code_date = Math.floor((Math.random() * 9999) + 1000);;
+                $.getJSON('https://api.thingspeak.com/update?api_key=SFEWFZXDR21W5LRP&field1=' + code_date);
+                // start updates
+                getUpdates();
+                // check for new updates
+                updates = setInterval('getUpdates()', 5000);
+            }
+            // save to local storage
+            localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
+        }
+        function send_queue(r, userId, obj) {
+            $.getJSON(thingspeak['url'] + '/update?api_key=FIV2UGQG1OAR6K65&field1=' + r + '&field2=' + userId, function (data) {
+                if (data == '0') {
+                    alert('error!!!!!!!');
+                } else {
+                    alert('Success : ' + data);
+                    document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
+                    $.getJSON("https://thawing-inlet-67202.herokuapp.com/linebot.php");
+                }
+            });
+        }
+        function delete_queue(obj) {
+            document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
+        }
+        function add_queue() {
+            //var table = document.getElementById("output");
+            //var lastRowIndex = table.rows.length - 1;
+            //var lastCell = table.rows[lastRowIndex].cells[1];
+            //var number_queue = parseInt(lastCell.innerHTML, 10) + 1;
+            //console.log(number_queue);
+            $.getJSON('http://api.thingspeak.com/channels/202503/feed/last.json?api_key=0QJTN9QPAXWCI68I', function (data) {
+                var get_last = data.field1;
+                if (get_last == undefined) {
+                    get_last = 1;
+                } else {
+                    get_last = parseInt(get_last) + 1;
+                }
+                console.log(get_last);
+                $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + get_last + '&field2=booking&field3=admin&field4=' + get_last);
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -14,17 +189,50 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#iotNavBar">
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="admin.html">Queue</a>
+                <a class="navbar-brand" href="admin.html">Queue Admin</a>
             </div>
-            <div class="collapse navbar-collapse" id="iotNavBar">
-                <ul class="nav navbar-nav">
-                    <li><a href="thingspeak.html">ThingSpeak</a></li>
-                </ul>
-            </div>
+        </div>
     </nav>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Queue Logger</h1>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <span class="input-group-addon">Channel</span>
+                            <input type="text" class="form-control" id="channel">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Read API Key</span>
+                            <input type="text" class="form-control" id="read_api_key">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <button type="button" class="btn btn-primary" onclick="playPause(this)" id="start">
+                            <span class="glyphicon glyphicon-play"></span>
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="add_queue()">
+                            Add Queue
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <h1 id="header"></h1>
+                <table class="table table-striped" id="output"></table>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
