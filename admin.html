@@ -150,12 +150,16 @@
             localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
         }
         function send_queue(r, userId, obj) {
+            var table = document.getElementById("output");
+            var rows = table.getElementsByTagName("tr");
             $.getJSON(thingspeak['url'] + '/update?api_key=FIV2UGQG1OAR6K65&field1=' + r + '&field2=' + userId, function (data) {
                 if (data == '0') {
                     alert('error!!!!!!!');
+                    rows[obj.parentNode.rowIndex].style.backgroundColor = "#B22222";
                 } else {
                     alert('Success : ' + data);
-                    document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
+                    //document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
+                    rows[obj.parentNode.rowIndex].style.backgroundColor = "	#009900";
                     $.getJSON("https://thawing-inlet-67202.herokuapp.com/linebot.php");
                 }
             });
