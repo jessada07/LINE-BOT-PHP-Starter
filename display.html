@@ -44,6 +44,7 @@
         var ctx = c.getContext("2d");
         var get_last = '0';
         var wait_queue = '0';
+        var queue = '0';
         // setup time for updates
         var updates = null;
         getUpdates();
@@ -60,12 +61,17 @@
                 ctx.fillStyle = "#2F4F4F";
                 ctx.font = "10px Arial";
                 wait_queue = Math.abs(get_last - data.field1);
+                queue = data.field1;
+                if (queue == undefined) {
+                    wait_queue = 0;
+                    queue = 0;
+                }
                 ctx.fillText( wait_queue + " in queues", 520, 280);
                 ctx.fillStyle = "#2F4F4F";
                 ctx.font = "30px Arial";
                 ctx.fillText("Queue", 5, 30);
                 ctx.fillStyle = "#2F4F4F";
-                ctx.fillText(data.field1, 280, 150);
+                ctx.fillText(queue, 280, 150);
             });
         }
     </script>
