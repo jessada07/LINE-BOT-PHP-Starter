@@ -52,7 +52,7 @@
         function getUpdates() {
             console.log('start');
             $.getJSON('http://api.thingspeak.com/channels/202503/feed/last.json?api_key=0QJTN9QPAXWCI68I', function (data) {
-                get_last = data.field1;
+                get_last = data.field4;
                 console.log(get_last);
             });
             // get the data with a webservice call
