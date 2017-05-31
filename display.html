@@ -43,6 +43,7 @@
         var c = document.getElementById("canvas");
         var ctx = c.getContext("2d");
         var get_last = '0';
+        var wait_queue = '0';
         // setup time for updates
         var updates = null;
         getUpdates();
@@ -58,7 +59,11 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = "#2F4F4F";
                 ctx.font = "10px Arial";
-                ctx.fillText(get_last - data.field1 + " in queues", 520, 280);
+                wait_queue = get_last - data.field1;
+                if (wait_queue < 0) {
+                    wait_queue = 0;
+                }
+                ctx.fillText( wait_queue + " in queues", 520, 280);
                 ctx.fillStyle = "#2F4F4F";
                 ctx.font = "30px Arial";
                 ctx.fillText("Queue", 5, 30);
