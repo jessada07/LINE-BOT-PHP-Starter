@@ -58,20 +58,54 @@
             // get the data with a webservice call
             $.getJSON('http://api.thingspeak.com/channels/202506/feed/last.json?api_key=5WBJKUX2CGYQ04N2', function (data) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                var grd = ctx.createLinearGradient(0, 0, 600, 0);
+                var number_count = 1;
+                grd.addColorStop(0, "#1F4740");
+                grd.addColorStop(1, "#70C2B3");
+
+                // draw display
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, 700, 60);
+
                 ctx.fillStyle = "#2F4F4F";
-                ctx.font = "10px Arial";
+                ctx.font = "12px Arial";
                 wait_queue = Math.abs(get_last - data.field1);
                 queue = data.field1;
                 if (queue == undefined) {
                     wait_queue = 0;
                     queue = 0;
                 }
-                ctx.fillText( wait_queue + " in queues", 520, 280);
-                ctx.fillStyle = "#2F4F4F";
-                ctx.font = "30px Arial";
-                ctx.fillText("Queue", 5, 30);
-                ctx.fillStyle = "#2F4F4F";
-                ctx.fillText(queue, 280, 150);
+                ctx.fillText(wait_queue + " in queues", 520, 280);
+                ctx.fillStyle = "#FFFFFF";
+                ctx.font = "40px Arial";
+                ctx.fillText("ก๋วยเตี๋ยวน้ำใส", 5, 45);
+                ctx.fillStyle = "#317266";
+                ctx.font = "20px Arial";
+                ctx.fillText("คิวที่", 10, 90);
+                ctx.fillStyle = "#060E0D";
+                ctx.font = "20px Arial";
+                ctx.fillText("คิวถัดไป", 10, 220);
+                ctx.strokeStyle = "#317266";
+                ctx.rect(100, 100, 400, 80);
+                ctx.stroke();
+                ctx.fillStyle = "#317266";
+                ctx.font = "60px Arial";
+                var str = "" + data.field1;
+                var pad = "000"
+                var ans = pad.substring(0, pad.length - str.length) + str
+                ctx.fillText(ans, 250, 160);
+                for (i = queue; i < get_last; i++) {
+                    if (number_count < 5) {
+                        ctx.fillStyle = "#2F4F4F";
+                        ctx.font = "40px Arial";
+                        var count = parseInt(data.field1) + number_count;
+                        str = "" + count;
+                        pad = "000";
+                        ans = pad.substring(0, pad.length - str.length) + str;
+                        ctx.fillText(ans, (number_count * 110), 250);
+                        number_count++;
+                    }
+                }
             });
         }
     </script>

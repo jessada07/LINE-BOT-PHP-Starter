@@ -77,7 +77,7 @@
                         // add header for each field
                         if (data.channel.hasOwnProperty('field1')) { $('#output').find('thead').append("<th>Queue</th>"); }
                         if (data.channel.hasOwnProperty('field2')) { $('#output').find('thead').append("<th>Status</th>"); }
-                        if (data.channel.hasOwnProperty('field3')) { $('#output').find('thead').append("<th>User Type</th>");; }
+                        if (data.channel.hasOwnProperty('field3')) { $('#output').find('thead').append("<th>Type</th>");; }
                         // add body to output table
                         $('#output').append("<tbody></tbody>");
                     }
@@ -103,7 +103,7 @@
                             if (feed.hasOwnProperty('field3')) {
                                 var data_field3 = feed.field3;
                                 if (data_field3 != 'admin') {
-                                    data_field3 = 'user';
+                                    data_field3 = 'Bot';
                                 }
                                 $new_row.append("<td>" + data_field3 + "</td>");
                                 $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"send_queue(' + feed.field1 + ',\'' + feed.field3 + '\',this)"' + "style=" + '"background-color:#00CC33"' + ">Send</button>");
@@ -149,6 +149,8 @@
             // save to local storage
             localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
         }
+
+        // call queue
         function send_queue(r, userId, obj) {
             var table = document.getElementById("output");
             var rows = table.getElementsByTagName("tr");
@@ -158,7 +160,6 @@
                     rows[obj.parentNode.rowIndex].style.backgroundColor = "#B22222";
                 } else {
                     alert('Success : ' + data);
-                    //document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
                     rows[obj.parentNode.rowIndex].style.backgroundColor = "	#009900";
                     $.getJSON("https://thawing-inlet-67202.herokuapp.com/linebot.php");
                 }
@@ -167,12 +168,9 @@
         function delete_queue(obj) {
             document.getElementById("output").deleteRow(obj.parentNode.rowIndex);
         }
+
+        // add queue by admin
         function add_queue() {
-            //var table = document.getElementById("output");
-            //var lastRowIndex = table.rows.length - 1;
-            //var lastCell = table.rows[lastRowIndex].cells[1];
-            //var number_queue = parseInt(lastCell.innerHTML, 10) + 1;
-            //console.log(number_queue);
             $.getJSON('http://api.thingspeak.com/channels/202503/feed/last.json?api_key=0QJTN9QPAXWCI68I', function (data) {
                 var get_last = data.field1;
                 if (get_last == undefined) {
@@ -181,7 +179,7 @@
                     get_last = parseInt(get_last) + 1;
                 }
                 console.log(get_last);
-                $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + get_last + '&field2=booking&field3=admin&field4=' + get_last);
+                $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + get_last + '&field2=booking&field3=Web&field4=' + get_last);
             });
         }
     </script>
