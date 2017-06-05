@@ -94,8 +94,10 @@
                             $new_row.append("<td  width=40%><time datetime='" + feed.created_at + "'>" + feed.created_at + "</time></td>");
                             // add field data to each field
                             if (feed.hasOwnProperty('field1')) {
-                                //$new_row.append("<td width=30%>" + feed.field1 + "</td>");
-                                $new_row.append("<td>" + feed.field1 + "</td>");
+                                var str = "" + feed.field1;
+                                var pad = "000"
+                                var ans = pad.substring(0, pad.length - str.length) + str
+                                $new_row.append("<td>" + ans + "</td>");
                             }
                             if (feed.hasOwnProperty('field2')) {
                                 $new_row.append("<td>" + feed.field2 + "</td>");
