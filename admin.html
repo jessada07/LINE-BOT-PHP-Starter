@@ -21,6 +21,7 @@
         // setup IoT service details and defaults
         var thingspeak = {};
         var new_row;
+        var number_seat;
         // check local storage for thingspeak
         if (localStorage.getItem('thingspeak')) {
             thingspeak = JSON.parse(localStorage.getItem('thingspeak'));
@@ -47,11 +48,12 @@
                 // update params
                 thingspeak['channel'] = $('#channel').val();
                 thingspeak['read_api_key'] = $('#read_api_key').val();
-                // save to local storage
+                number_seat = $('#number_seat').val();
+                /*// save to local storage
                 localStorage.setItem('thingspeak', JSON.stringify(thingspeak));
                 // clear output
                 $('#header').html('');
-                $('#output').html('');
+                $('#output').html('');*/
             });
             // start updates if play button is active
             if (thingspeak['start']) {
@@ -185,7 +187,7 @@
                     get_last = parseInt(get_last) + 1;
                 }
                 console.log(get_last);
-                $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + get_last + '&field2=booking&field3=Web&field4=' + get_last);
+                $.getJSON('https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1=' + get_last + '&field2=booking&field3=Web&field4=' + get_last + '&field5=' + number_seat);
             });
         }
     </script>
@@ -224,13 +226,19 @@
                             <input type="text" class="form-control" id="read_api_key">
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-2">
                         <button type="button" class="btn btn-primary" onclick="playPause(this)" id="start">
                             <span class="glyphicon glyphicon-play"></span>
                         </button>
                         <button type="button" class="btn btn-primary" onclick="add_queue()">
                             Add Queue
                         </button>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <span class="input-group-addon">Seat</span>
+                            <input type="text" class="form-control" id="number_seat">
+                        </div>
                     </div>
                 </div>
             </div>
