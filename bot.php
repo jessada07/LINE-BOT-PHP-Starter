@@ -10,7 +10,7 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
-			$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
+		    $url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
 			$curl_handle = curl_init();
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {
 			$text = curl_exec( $curl_handle );
 			curl_close( $curl_handle ); 
 			$object = json_decode($text);
-			$messager = $object->{'field1'}; 
+			$messager = $object->{'field1'};
 
 			// Get text sent
 			$text = $event['message']['text'];      
@@ -46,19 +46,7 @@ if (!is_null($events['events'])) {
 				 )
 			);
 		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] !== 'cancel') {
-	    $code = $event['postback']['data'];
-		$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
-        $curl_handle = curl_init();
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt( $curl_handle, CURLOPT_URL, $url );
-        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-        $text = curl_exec( $curl_handle );
-        curl_close( $curl_handle ); 
-        $object = json_decode($text);
-        $messager = $object->{'field1'}; 
-
-		if($messager == $code){
+    if ($event['type'] == 'postback' && $event['postback']['data'] == '2' ||  $event['postback']['data'] == '4' || $event['postback']['data'] == '8' || $event['postback']['data'] == '10') {
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			$replyToken = $event['replyToken'];
@@ -84,13 +72,7 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
-		} else {
-			$replyToken = $event['replyToken'];
-			$messages = [
-				'type' => 'text',
-				'text' => 'ขออภัยหมดเวลาในการจอง'
-			];		
-		}
+		} 
     }
 
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
@@ -128,6 +110,60 @@ if (!is_null($events['events'])) {
           'type' => 'text',
           'text' => 'ยกเลิก Queue เรียบร้อย'
       ];
+    }
+
+	if ($event['type'] == 'postback' && $event['postback']['data'] != 'cancel') {
+	    $code = $event['postback']['data'];
+		$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
+        $curl_handle = curl_init();
+        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt( $curl_handle, CURLOPT_URL, $url );
+        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+        $text = curl_exec( $curl_handle );
+        curl_close( $curl_handle ); 
+        $object = json_decode($text);
+        $messager = $object->{'field1'}; 
+
+		if($messager == $code){
+			// Get text sent
+			$text = $event['message']['text'];      
+			// Get replyToken
+	        $replyToken = $event['replyToken'];      
+			// Build message to reply back
+			$messages = array(
+				'type' => 'template',
+				'altText' => 'This is a buttons template',
+				'template' => array(
+					'type' => 'buttons',
+					'text' => 'จำนวนที่นั่ง',
+					'actions' => array(
+						  array(
+							'type' => 'postback',
+							'label'=> '1-2 ที่นั่ง',
+							'data' => '2'
+						  ),array(
+							'type' => 'postback',
+							'label'=> '3-4 ที่นั่ง',
+							'data' => '4'
+						  ),array(
+							'type' => 'postback',
+							'label'=> '5-8 ที่นั่ง',
+							'data' => '8'
+						  ),array(
+							'type' => 'postback',
+							'label'=> '10 ที่นั่งขึ้นไป',
+							'data' => '10'
+						  )
+					 )
+				 )
+			);    
+		}else {
+			$replyToken = $event['replyToken'];
+			$messages = [
+				'type' => 'text',
+				'text' => 'ขออภัยหมดเวลาในการจอง'
+			];		
+		}
     }
     
 		// Make a POST Request to Messaging API to reply to sender
