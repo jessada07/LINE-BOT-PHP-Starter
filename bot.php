@@ -46,7 +46,7 @@ if (!is_null($events['events'])) {
 				 )
 			);
 		}			
-   /* if ($event['type'] == 'postback' && $event['postback']['data'] == '2' ||  $event['postback']['data'] == '4' || $event['postback']['data'] == '8' || $event['postback']['data'] == '10') {
+    if ($event['type'] == 'postback' && $event['postback']['data'] == '2') {
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			$replyToken = $event['replyToken'];
@@ -73,7 +73,7 @@ if (!is_null($events['events'])) {
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
 		} 
-    }*/
+    }
 
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
 		  // Get replyToken
