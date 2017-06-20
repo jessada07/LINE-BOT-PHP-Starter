@@ -46,7 +46,7 @@ if (!is_null($events['events'])) {
 				 )
 			);
 		}			
-    if ($event['type'] == 'postback' && $event['postback']['data'] == '2' ||  $event['postback']['data'] == '4' || $event['postback']['data'] == '8' || $event['postback']['data'] == '10') {
+   /* if ($event['type'] == 'postback' && $event['postback']['data'] == '2' ||  $event['postback']['data'] == '4' || $event['postback']['data'] == '8' || $event['postback']['data'] == '10') {
 			// Get replyToken
 			$user_id = $event['source']['userId'];
 			$replyToken = $event['replyToken'];
@@ -73,43 +73,43 @@ if (!is_null($events['events'])) {
 				'text' => 'Queue ของคุณคือ   '.$mes
 			];
 		} 
-    }
+    }*/
 
     if ($event['type'] == 'postback' && $event['postback']['data'] == 'cancel') {
-      // Get replyToken
-      $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
-      $curl_handle = curl_init();
-      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt( $curl_handle, CURLOPT_URL, $url );
-      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-      $text = curl_exec( $curl_handle );
-      curl_close( $curl_handle ); 
-      $obj = json_decode($text);
-      $last = $obj->{'field4'}; 
+		  // Get replyToken
+		  $url = "http://api.thingspeak.com/channels/202503/feeds/last.json?api_key=0QJTN9QPAXWCI68I";
+		  $curl_handle = curl_init();
+		  curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+		  curl_setopt( $curl_handle, CURLOPT_URL, $url );
+		  curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+		  $text = curl_exec( $curl_handle );
+		  curl_close( $curl_handle ); 
+		  $obj = json_decode($text);
+		  $last = $obj->{'field4'}; 
       
-      $user_id = $event['source']['userId'];
-	  $replyToken = $event['replyToken'];
-      $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
-      $curl_handle = curl_init();
-      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt( $curl_handle, CURLOPT_URL, $url );
-      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-      $text = curl_exec( $curl_handle );
-      curl_close( $curl_handle ); 
-      $obj = json_decode($text);
-      $mes = $obj->{'field1'}; 
+		  $user_id = $event['source']['userId'];
+		  $replyToken = $event['replyToken'];
+		  $url = "http://api.thingspeak.com/channels/202506/feeds/last.json?api_key=5WBJKUX2CGYQ04N2";
+		  $curl_handle = curl_init();
+		  curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+		  curl_setopt( $curl_handle, CURLOPT_URL, $url );
+		  curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+		  $text = curl_exec( $curl_handle );
+		  curl_close( $curl_handle ); 
+		  $obj = json_decode($text);
+		  $mes = $obj->{'field1'}; 
       
-      $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=cancel&field3='.$user_id.'&field4='.$last;
-      $curl_handle = curl_init();
-      curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt( $curl_handle, CURLOPT_URL, $url );
-      curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
-      curl_exec( $curl_handle );
-      curl_close( $curl_handle );
-      $messages = [
-          'type' => 'text',
-          'text' => 'ยกเลิก Queue เรียบร้อย'
-      ];
+		  $url = 'https://api.thingspeak.com/update?api_key=0QJTN9QPAXWCI68I&field1='.$mes.'&field2=cancel&field3='.$user_id.'&field4='.$last;
+		  $curl_handle = curl_init();
+		  curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+		  curl_setopt( $curl_handle, CURLOPT_URL, $url );
+		  curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+		  curl_exec( $curl_handle );
+		  curl_close( $curl_handle );
+		  $messages = [
+			  'type' => 'text',
+			  'text' => 'ยกเลิก Queue เรียบร้อย'
+		  ];
     }
 
 	if ($event['type'] == 'postback' && $event['postback']['data'] != 'cancel') {
@@ -164,7 +164,7 @@ if (!is_null($events['events'])) {
 				'text' => 'ขออภัยหมดเวลาในการจอง'
 			];		
 		}
-    }
+	}
     
 		// Make a POST Request to Messaging API to reply to sender
 	    $url = 'https://api.line.me/v2/bot/message/reply';
