@@ -147,8 +147,40 @@ if (!is_null($events['events'])) {
 			curl_close( $curl_handle ); 
 			$object = json_decode($text);
 			$messager = $object->{'field1'}; 
+			// Get text sent
+				$text = $event['message']['text'];      
+				// Get replyToken
+				$replyToken = $event['replyToken'];      
+				// Build message to reply back
+				$messages = array(
+					'type' => 'template',
+					'altText' => 'This is a buttons template',
+					'template' => array(
+						'type' => 'buttons',
+						'text' => 'จำนวนที่นั่ง',
+						'actions' => array(
+							  array(
+								'type' => 'postback',
+								'label'=> '1-2 ที่นั่ง',
+								'data' => '2'
+							  ),array(
+								'type' => 'postback',
+								'label'=> '3-4 ที่นั่ง',
+								'data' => '4'
+							  ),array(
+								'type' => 'postback',
+								'label'=> '5-8 ที่นั่ง',
+								'data' => '8'
+							  ),array(
+								'type' => 'postback',
+								'label'=> '10 ที่นั่งขึ้นไป',
+								'data' => '10'
+							  )
+						 )
+					 )
+				);    
 
-			if($messager == $code){
+			/*if($messager == $code){
 				// Get text sent
 				$text = $event['message']['text'];      
 				// Get replyToken
@@ -187,7 +219,7 @@ if (!is_null($events['events'])) {
 					'type' => 'text',
 					'text' => 'ขออภัยหมดเวลาในการจอง'
 				];		
-			}
+			}*/
 		}	    
 	}
     
