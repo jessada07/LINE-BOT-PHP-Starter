@@ -77,7 +77,8 @@
                         // add header for each field
                         if (data.channel.hasOwnProperty('field1')) { $('#output').find('thead').append("<th>Queue</th>"); }
                         if (data.channel.hasOwnProperty('field2')) { $('#output').find('thead').append("<th>Status</th>"); }
-                        if (data.channel.hasOwnProperty('field3')) { $('#output').find('thead').append("<th>Type</th>");; }
+                        if (data.channel.hasOwnProperty('field3')) { $('#output').find('thead').append("<th>Type</th>"); }
+                        if (data.channel.hasOwnProperty('field5')) { $('#output').find('thead').append("<th>Number Seat</th>"); }
                         // add body to output table
                         $('#output').append("<tbody></tbody>");
                     }
@@ -110,6 +111,9 @@
                                 $new_row.append("<td>" + data_field3 + "</td>");
                                 $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"send_queue(' + feed.field1 + ',\'' + feed.field3 + '\',this)"' + "style=" + '"background-color:#00CC33"' + ">Send</button>");
                                 $new_row.append("<button type=" + '"button"' + "class=btn btn-primary onclick=" + '"delete_queue(this)"' + "style=" + '"background-color:#FF0033"' + ">Delete</button>");
+                            }
+                            if (feed.hasOwnProperty('field5')) {
+                                $new_row.append("<td>" + feed.field5 + "</td>");
                             }
                             // add the row to the table
                             $('#output').prepend($new_row);
