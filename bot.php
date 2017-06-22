@@ -34,13 +34,13 @@ if (!is_null($events['events'])) {
 					'actions' => array(
 						  array(
 							'type' => 'postback',
-							'label'=> 'Order',
+							'label'=> 'Booking',
 							'data' => $messager
 						  ),
 						  array(
 							'type' => 'message',
 							'label'=> 'Help',
-							'text' => 'สามารถจองคิวได้โดยกดคำว่า Order โดยมีอายุการใช้งาน 1 วัน'
+							'text' => 'สามารถจองคิวได้โดยกดคำว่า Booking โดยมีอายุการใช้งาน 1 วัน'
 						  )
 					 )
 				 )
