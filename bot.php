@@ -9,7 +9,7 @@ if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
 		// check beacon
-		if ($event['type'] == 'beacon' && $event['beacon']['type'] == 'enter') {
+		if ($event['type'] == 'beacon') {
 			$url = "http://api.thingspeak.com/channels/266142/feeds/last.json?api_key=UJ9398YTW67RQ2KN";
 			$curl_handle = curl_init();
 			curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
