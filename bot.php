@@ -19,7 +19,7 @@ if (!is_null($events['events'])) {
 			switch($text){
 				case 'Battery?':
 				    // Build message to reply back           
-					$url = "http://api.thingspeak.com/channels/482888/feeds/last.json?api_key=5AZJRVINNBDSF7B7";
+					$url = "https://api.thingspeak.com/channels/482888/field/1/last.json?api_key=5AZJRVINNBDSF7B7";
 		       		$curl_handle = curl_init();
 		       		curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 		       		curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -36,7 +36,7 @@ if (!is_null($events['events'])) {
 				break;
 				case 'Temp?':
 				    // Build message to reply back           
-					$url = "http://api.thingspeak.com/channels/482888/feeds/last.json?api_key=5AZJRVINNBDSF7B7";
+					$url = "https://api.thingspeak.com/channels/482888/field/2/last.json?api_key=5AZJRVINNBDSF7B7";
 			        $curl_handle = curl_init();
 			        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			        curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -53,7 +53,7 @@ if (!is_null($events['events'])) {
 				break;
 				case 'Humidity?':
 				    // Build message to reply back           
-					$url = "http://api.thingspeak.com/channels/482888/feeds/last.json?api_key=5AZJRVINNBDSF7B7";
+					$url = "https://api.thingspeak.com/channels/482888/field/3/last.json?api_key=5AZJRVINNBDSF7B7";
 			        $curl_handle = curl_init();
 			        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
 			        curl_setopt( $curl_handle, CURLOPT_URL, $url );
@@ -74,6 +74,7 @@ if (!is_null($events['events'])) {
 							     'type' => 'text',
 							     'text' => 'help for line bot'			
 							    ];  
+				break;
   			  default:
 					$messages = [
 							     'type' => 'text',
