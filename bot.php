@@ -15,7 +15,43 @@
 		    // Build message to reply back
 		    $messages = [
 					    'type' => 'text',
-				        'text' => 'ขณะนี้แบตเตอรี่ '.$mes.'%'
+				        'text' => 'ขณะนี้แบตเตอรี่ '.$mes.' %'
+					    ];
+    }else if($data == "Temp?"){
+    	$url = "http://api.thingspeak.com/channels/482888/feeds/last.json?api_key=5AZJRVINNBDSF7B7";
+        $curl_handle = curl_init();
+        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt( $curl_handle, CURLOPT_URL, $url );
+        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+        $text = curl_exec( $curl_handle );
+        curl_close( $curl_handle ); 
+        $obj = json_decode($text);
+        $mes = $obj->{'field2'};             
+		    // Build message to reply back
+		    $messages = [
+					    'type' => 'text',
+				        'text' => 'ขณะนี้อุณหภูมิ '.$mes.' celsius'
+					    ];
+    }else if($data == "Humidity?"){
+    	$url = "http://api.thingspeak.com/channels/482888/feeds/last.json?api_key=5AZJRVINNBDSF7B7";
+        $curl_handle = curl_init();
+        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt( $curl_handle, CURLOPT_URL, $url );
+        curl_setopt( $curl_handle, CURLOPT_RETURNTRANSFER, true);
+        $text = curl_exec( $curl_handle );
+        curl_close( $curl_handle ); 
+        $obj = json_decode($text);
+        $mes = $obj->{'field3'};             
+		    // Build message to reply back
+		    $messages = [
+					    'type' => 'text',
+				        'text' => 'ขณะนี้ความชื้น '.$mes.'%'
+					    ];
+    }else if($data =="Help?"){           
+		    // Build message to reply back
+		    $messages = [
+					    'type' => 'text',
+				        'text' => 'help for use linebot'
 					    ];
     }else{
     // Build message to reply back
